@@ -1,6 +1,6 @@
 package org.example.Algorithms;
 
-import org.example.ArrayWithElements.GenerateNumbersInTxt;
+import org.example.ArrayWithElements.MyUtilClass;
 
 import java.util.Arrays;
 
@@ -9,11 +9,11 @@ public class MergeSortArray {
     // O( n log n)
     // n + n (log n) ==> , Overall by merge sort: n log n
     public static void main(String[] args) {
-        Integer[] nums = GenerateNumbersInTxt.getNumsArray();
+        Integer[] nums = MyUtilClass.getNumsArray();
         // n log n
         mergeSort(nums);
         // n times
-        if (GenerateNumbersInTxt.isSorted(nums)) {
+        if (MyUtilClass.isSorted(nums)) {
             System.out.println("arr is sorted with elements count: " + nums.length);
         }
     }

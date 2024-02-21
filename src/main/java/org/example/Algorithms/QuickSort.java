@@ -1,60 +1,98 @@
 package org.example.Algorithms;
 
-import org.example.ArrayWithElements.GenerateNumbersInTxt;
+import org.example.ArrayWithElements.MyUtilClass;
 
-import java.io.*;
+import java.util.Arrays;
 
 public class QuickSort {
-    public static void main(String[] args) throws IOException {
-        Integer[] arr = GenerateNumbersInTxt.getNumsArray();
-        quickSort(arr);
-        if (GenerateNumbersInTxt.isSorted(arr)) {
-            System.out.println("arr is sorted, size: " + arr.length);
+    private static int c = 0;
+
+    public static void main(String[] args) {
+        // %s -> types
+        String beforeMsg = "\nQuick Sort using %s \nBefore: array ";
+        // %s, %s -> partitions :length
+        String successful = "was sorted, partition times: %s arr length: %d";
+        String alreadySorted = "Array already sorted";
+        String notSorted = "not sorted";
+        String fail = "wasn't sorted";
+
+        //------------ Nums: aprox 1_000_000 -------------\\
+        c = 0;
+        Integer[] nums = MyUtilClass.getNumsArray();
+
+        System.out.println(
+                String.format(beforeMsg, "Integer") +
+                        (MyUtilClass.isSorted(nums) ? alreadySorted : notSorted));
+
+        quickSort(nums, 0, nums.length - 1);
+
+        System.out.println("After: " +
+                (MyUtilClass.isSorted(nums) ?
+                        String.format(successful, c, nums.length) : fail));
+
+
+        //-----------------------------------------------\\
+
+        //----------- Strings: aprox 25_000 -------------\\
+        c = 0;
+        String[] arr = MyUtilClass.getNamesArray();
+
+        System.out.println(
+                String.format(beforeMsg, "String") +
+                        (MyUtilClass.isSorted(arr) ? alreadySorted : notSorted));
+
+        quickSort(arr, 0, arr.length - 1);
+
+        System.out.println("After: " +
+                (MyUtilClass.isSorted(arr) ?
+                        String.format(successful, c, arr.length) : fail));
+        //-----------------------------------------------\\
+    }
+
+    // idxStart, idxEnd; both inclusive
+    public static <T extends Comparable<T>> void quickSort(T[] arr, int idxStart, int idxEnd) {
+
+        if (idxStart < idxEnd) {
+            int lastIdxOfLessSide = partition(arr, idxStart, idxEnd);//[ less ][ greater or equal ]
+
+            quickSort(arr, idxStart, lastIdxOfLessSide);
+            quickSort(arr, lastIdxOfLessSide + 1, idxEnd);
         }
 
     }
 
-    //subroutines: divide in two parts: swap index left and right
-    public static void quickSort(Integer[] arr) {
-        divideByPivot(arr, 0, arr.length - 1);
-    }
+    public static <T extends Comparable<T>> int partition(T[] arr, int idxStart, int idxEnd) {
 
-    /**
-     * Pivot is randomly chosen
-     *
-     * @param arr
-     * @param from start index - inclusive
-     * @param to   end index - inclusive
-     */
-    public static void divideByPivot(Integer[] arr, int from, int to) {
-        if (from >= to) return;
+        c++;
+        setRandomStartPivot(arr, idxStart, idxEnd);// random "pivot"
+        T pivot = arr[idxStart];
+        int left = idxStart - 1;
+        int right = idxEnd + 1;
 
-        // Random index swapped with 'from' index, 'from' is the pivot
-        int randomIdx = (int) Math.floor(Math.random() * (to - from + 1) + from);
-        swap(arr, randomIdx, from);
+        while (true) {
+            do left++;
+            while (arr[left].compareTo(pivot) < 0); //arr[left] < pivot
 
-        int pivot = arr[from];
-        int left = from + 1; // range= (from, to]
-        int right = to;
+            do right--;
+            while (arr[right].compareTo(pivot) > 0);//arr[right] > pivot
 
-        while (left <= right) {
-            while (left <= to && arr[left] <= pivot) left++; // left++ until arr[left] > pivot
-            while (right >= from && arr[right] > pivot) right--;// right-- until arr[right] <= pivot
-            if (left < right) swap(arr, left++, right--); //if right still doesn't pass to the less than values
+            if (left >= right) return right;// if left passed to greater or equal side
+            swap(arr, left, right);
         }
-        left--; // setting back to the last less than or equal to pivot
-        right++; // setting back to the first greater than pivot
 
-        swap(arr, from, left); // swap pivot with the last less than or equal to pivot
-        left--; // structure: [less than or equals] [pivot] [greater than]
-
-        divideByPivot(arr, from, left);// -{ pivot }, [less than or equal to pivot]
-        divideByPivot(arr, right, to);// -{ pivot }, [greater than pivot]
     }
 
-    private static void swap(Integer[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    private static <T> void setRandomStartPivot(T[] arr, int min, int max) {
+        // both inclusive
+        int idxRan = (min) + (int) (Math.random() * (max - min + 1));
+        swap(arr, idxRan, min);
     }
+
+    private static <T> void swap(T[] arr, int a, int b) {
+        T temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
+
+
 }
