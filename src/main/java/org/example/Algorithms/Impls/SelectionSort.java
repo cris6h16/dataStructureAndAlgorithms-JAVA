@@ -1,4 +1,4 @@
-package org.example.Algorithms;
+package org.example.Algorithms.Impls;
 
 import org.example.ArrayWithElements.MyUtilClass;
 
@@ -14,7 +14,7 @@ public class SelectionSort {
 
 
     // subroutines: get min value Index from, swap i with index
-    public static void selectionSort(Integer[] arr) {
+    public static <T extends Comparable<T>> void selectionSort(T[] arr) {
 
         int idx, aux;
         for (int i = 0; i < arr.length; i++) {
@@ -24,19 +24,24 @@ public class SelectionSort {
 
     }
 
-    private static void swap(Integer[] arr, int a, int b) {
-        int temp = arr[a];
+    private static <T extends Comparable<T>> void swap(T[] arr, int a, int b) {
+        T temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
     }
 
-    private static int getMinValIdx(Integer[] arr, int fromIdx) {
+    private static <T extends Comparable<T>> int getMinValIdx(T[] arr, int fromIdx) {
         if (arr.length == 1) return 0;
+        if (arr.length == 0) return -1;
 
         int minIdx = 0;
-        for (; fromIdx < arr.length; fromIdx++) {
-            if (arr[fromIdx] < arr[minIdx]) minIdx = fromIdx;
+        while (fromIdx < arr.length) {
+            if (arr[fromIdx].compareTo(arr[minIdx]) < 0)// arr[fromIdx] < arr[minIdx]
+                minIdx = fromIdx;
+
+            fromIdx++;
         }
+
         return minIdx;
     }
 }

@@ -1,4 +1,4 @@
-package org.example.Algorithms;
+package org.example.Algorithms.Impls;
 
 import org.example.DataStructure.LinkedList.LinkedList;
 import org.example.DataStructure.LinkedList.Node;

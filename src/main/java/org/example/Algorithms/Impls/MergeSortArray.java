@@ -1,4 +1,4 @@
-package org.example.Algorithms;
+package org.example.Algorithms.Impls;
 
 import org.example.ArrayWithElements.MyUtilClass;
 
@@ -10,9 +10,7 @@ public class MergeSortArray {
     // n + n (log n) ==> , Overall by merge sort: n log n
     public static void main(String[] args) {
         Integer[] nums = MyUtilClass.getNumsArray();
-        // n log n
         mergeSort(nums);
-        // n times
         if (MyUtilClass.isSorted(nums)) {
             System.out.println("arr is sorted with elements count: " + nums.length);
         }
@@ -20,20 +18,20 @@ public class MergeSortArray {
 
 
     // Big O: O(n log n)
-    private static void mergeSort(Integer[] nums) {
+    public static <T extends Comparable<T>> void mergeSort(T[] nums) {
         if (nums.length <= 1) return;
         int midL = nums.length / 2;
-        Integer[] left = Arrays.copyOfRange(nums, 0, midL);
-        Integer[] right = Arrays.copyOfRange(nums, midL, nums.length);
+        T[] left = Arrays.copyOfRange(nums, 0, midL);
+        T[] right = Arrays.copyOfRange(nums, midL, nums.length);
         mergeSort(left);
         mergeSort(right);
         merge(nums, left, right);
     }
 
-    private static void merge(Integer[] original, Integer[] left, Integer[] right) {
+    private static <T extends Comparable<T>> void merge(T[] original, T[] left, T[] right) {
         int pL = 0, pR = 0, idx = 0;
         while (pL < left.length && pR < right.length)
-            original[idx++] = (left[pL] < right[pR]) ? left[pL++] : right[pR++];
+            original[idx++] = (left[pL].compareTo(right[pR]) < 0) ? left[pL++] : right[pR++];//left[pL] < right[pR]
         while (pL < left.length) original[idx++] = left[pL++];
         while (pR < right.length) original[idx++] = right[pR++];
     }

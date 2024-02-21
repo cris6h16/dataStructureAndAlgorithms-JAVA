@@ -1,4 +1,4 @@
-package org.example.Algorithms;
+package org.example.Algorithms.Impls;
 
 import org.example.ArrayWithElements.MyUtilClass;
 
@@ -47,6 +47,21 @@ public class QuickSort {
                 (MyUtilClass.isSorted(arr) ?
                         String.format(successful, c, arr.length) : fail));
         //-----------------------------------------------\\
+
+        /*
+        output
+
+        Quick Sort using Integer
+        Before: array not sorted
+        After: was sorted, partition times: 99999 arr length: 100000
+
+        Quick Sort using String
+        Before: array not sorted
+        After: was sorted, partition times: 25441 arr length: 25442
+
+        Process finished with exit code 0
+
+         */
     }
 
     // idxStart, idxEnd; both inclusive

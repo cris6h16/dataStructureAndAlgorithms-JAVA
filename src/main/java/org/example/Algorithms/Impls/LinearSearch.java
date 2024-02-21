@@ -1,4 +1,4 @@
-package org.example.Algorithms;
+package org.example.Algorithms.Impls;
 
 public class LinearSearch {
     public static void main(String[] args) {
@@ -26,7 +26,8 @@ public class LinearSearch {
     }
 
     // O(n)
-    public static int linearSearch(int[] nums, int val) {
+    TODO: IMPLEMENT FIXINETFACE ETC
+    public static <T extends Comparable<T>> int linearSearch(T[] nums, T val) {
         // n times
         for (int i = 0; i < nums.length; i++) if (nums[i] == val) return i;
         return -1;

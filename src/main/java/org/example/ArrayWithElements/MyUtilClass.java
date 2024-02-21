@@ -8,9 +8,7 @@ public class MyUtilClass {
     public static String path = "src/main/java/org/example/ArrayWithElements/unsortedNums.txt";
 
     public static void main(String[] args) throws IOException {
-//        generateNumbersInTxt(1_000_000);
-        String[] names = {"b", "b"};
-        System.out.println(isSorted(names));
+        generateNumbersInTxt(100_000);
     }
 
     /**
