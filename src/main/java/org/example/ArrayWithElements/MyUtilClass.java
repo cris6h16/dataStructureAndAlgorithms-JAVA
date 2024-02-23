@@ -1,5 +1,8 @@
 package org.example.ArrayWithElements;
 
+import org.example.DataStructure.LinkedList.LinkedList;
+import org.example.DataStructure.LinkedList.Node;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +11,11 @@ public class MyUtilClass {
     public static String path = "src/main/java/org/example/ArrayWithElements/unsortedNums.txt";
 
     public static void main(String[] args) throws IOException {
-        generateNumbersInTxt(100_000);
+//        generateNumbersInTxt(100_000);
+        String[] values = {"a", "a s", "a c", "b"};
+        System.out.println(
+                isSorted(values));
+
     }
 
     /**
@@ -81,7 +88,7 @@ public class MyUtilClass {
             String line = reader.readLine();
 
             while (line != null) {
-                names.add(line.trim().replace(" ", ""));
+                names.add(line.trim());
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {
@@ -93,23 +100,27 @@ public class MyUtilClass {
         return names.toArray(new String[0]);
     }
 
-    public static boolean isSorted(Integer[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i - 1] > arr[i]) {
+    public static <T extends Comparable<T>> boolean isSorted(T[] arr) {
+        for (int i = 1; i < arr.length; i++)
+            if (arr[i - 1].compareTo(arr[i]) > 0) //arr[i - 1] > arr[i]
                 return false;
-            }
-        }
+
+
         return true;
     }
 
-    public static boolean isSorted(String[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            if (!(arr[i - 1].equals(arr[i])) && !isLessOrEqualsStr(arr[i - 1], arr[i])) {
-//                System.out.println(i + " " + arr[i - 1] + " " + arr[i]);
+    public static <T extends Comparable<T>> boolean isSorted(LinkedList<T> arr) {
+        if (arr.size() <= 1) return true;
+
+        Node<T> current = arr.getHead();
+        while (current.getNext() != null) {
+            if (current.getData().compareTo(current.getNext().getData()) > 0) //current.getData() > current.getNext().getData()
                 return false;
-            }
+            current = current.getNext();
         }
+
         return true;
     }
+
 
 }

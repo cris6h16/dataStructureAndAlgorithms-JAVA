@@ -24,19 +24,23 @@ public class SelectionSort {
 
     }
 
-    private static <T extends Comparable<T>> void swap(T[] arr, int a, int b) {
+    private static <T extends Comparable<T>> void swap(T[] arr,
+                                                       int a,
+                                                       int b) {
         T temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
     }
 
-    private static <T extends Comparable<T>> int getMinValIdx(T[] arr, int fromIdx) {
+    private static <T extends Comparable<T>> int getMinValIdx(T[] arr,
+                                                              int fromIdx) {
         if (arr.length == 1) return 0;
         if (arr.length == 0) return -1;
 
         int minIdx = 0;
         while (fromIdx < arr.length) {
-            if (arr[fromIdx].compareTo(arr[minIdx]) < 0)// arr[fromIdx] < arr[minIdx]
+            // arr[fromIdx] < arr[minIdx]
+            if (arr[fromIdx].compareTo(arr[minIdx]) < 0)
                 minIdx = fromIdx;
 
             fromIdx++;

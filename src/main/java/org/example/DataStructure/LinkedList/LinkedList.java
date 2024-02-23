@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class LinkedList<T> {
     private Node<T> head;
-    private int size = 0;
     /*
     size, add(prepend), toString, search, delete.
      */
@@ -12,27 +11,28 @@ public class LinkedList<T> {
     public LinkedList(T headVal) {
         Node<T> head = new Node<>(headVal, null);
         this.head = head;
-        this.size++;
     }
 
     public LinkedList(Node<T> headVal) {
         this.head = headVal;
-        this.size++;
     }
 
-    public int getSize() {
-        return size;
+    public int size() {
+        Node<T> c = head;
+        int sz = 0;
+
+        while (c != null) {
+            sz++;
+            c = c.getNext();
+        }
+        return sz;
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     public LinkedList<T> prepend(T toHeadVal) {
         Node<T> newHead = new Node<>(toHeadVal, head);
         this.head = newHead;
 
-        size++;
         return this;
     }
 
@@ -59,7 +59,6 @@ public class LinkedList<T> {
                     b.setNext(c.getNext());
                 }
                 del = true;
-                size--;
             }
             b = c;
             c = c.getNext();
