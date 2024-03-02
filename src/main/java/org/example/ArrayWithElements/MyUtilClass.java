@@ -102,9 +102,10 @@ public class MyUtilClass {
 
     public static <T extends Comparable<T>> boolean isSorted(T[] arr) {
         for (int i = 1; i < arr.length; i++)
-            if (arr[i - 1].compareTo(arr[i]) > 0) //arr[i - 1] > arr[i]
+            if (arr[i - 1].compareTo(arr[i]) > 0) {//arr[i - 1] > arr[i]
+                System.out.println("Previous: " + arr[i - 1] + " Current: " + arr[i]+" index: "+i);
                 return false;
-
+            }
 
         return true;
     }
