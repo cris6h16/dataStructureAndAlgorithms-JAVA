@@ -1,8 +1,5 @@
 package org.example.ArrayWithElements;
 
-import org.example.DataStructure.LinkedList.LinkedList;
-import org.example.DataStructure.LinkedList.Node;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,18 +107,18 @@ public class MyUtilClass {
         return true;
     }
 
-    public static <T extends Comparable<T>> boolean isSorted(LinkedList<T> arr) {
-        if (arr.size() <= 1) return true;
-
-        Node<T> current = arr.getHead();
-        while (current.getNext() != null) {
-            if (current.getData().compareTo(current.getNext().getData()) > 0) //current.getData() > current.getNext().getData()
-                return false;
-            current = current.getNext();
-        }
-
-        return true;
-    }
+//    public static <T extends Comparable<T>> boolean isSorted(LinkedList<T> arr) {
+//        if (arr.size() <= 1) return true;
+//
+//        Node<T> current = arr.getHead();
+//        while (current.getNext() != null) {
+//            if (current.getData().compareTo(current.getNext().getData()) > 0) //current.getData() > current.getNext().getData()
+//                return false;
+//            current = current.getNext();
+//        }
+//
+//        return true;
+//    }
 
 
 }
