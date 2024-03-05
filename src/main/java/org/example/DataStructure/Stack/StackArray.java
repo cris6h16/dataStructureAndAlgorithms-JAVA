@@ -40,6 +40,7 @@ public class StackArray<T> implements Stack<T> {
 
     private void checkCapacity() {
         if (toAddIdx > arr.length - 1)
-            arr = Arrays.copyOf(arr, (int) (arr.length * 1.5)); // increment in 50%
+            // increment in 50%
+            arr = Arrays.copyOf(arr, (int) (arr.length * 1.5));
     }
 }

@@ -6,4 +6,5 @@ public interface Queue<T> {
     T peek();
     boolean isEmpty();
     boolean isFull();
+    Queue<T> clone();
 }

@@ -13,7 +13,13 @@ public class QueueCircularArray<T> implements Queue<T> {
         this.arr = (T[]) new Object[Math.max(InitialCapacity, 2)];
         head = tail = -1;
     }
-
+    // prototype design pattern
+    public QueueCircularArray(QueueCircularArray<T> q) {
+        this.arr = q.arr.clone();
+        head = q.head;
+        tail = q.tail;
+    }
+    //----------------------------
     @Override
     public boolean offer(T val) {
         if (isEmpty()) head++;
@@ -63,6 +69,15 @@ public class QueueCircularArray<T> implements Queue<T> {
 
     @Override
     public boolean isFull() {
-        return (tail + 1) % arr.length == head;// if next position for write isn't empty
+        // if next position for write isn't empty
+        return (tail + 1) % arr.length == head;
     }
+
+
+    // prototype design pattern
+    @Override
+    public Queue<T> clone() {
+        return new QueueCircularArray<>(this);
+    }
+    //----------------------------
 }
