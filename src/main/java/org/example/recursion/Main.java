@@ -1,6 +1,7 @@
 package org.example.recursion;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Main {
 
@@ -19,6 +20,9 @@ public class Main {
 
         Integer[] nums3 = {1, 2, 3, 4, 5, 7, 8, 9, 10};
         System.out.println("Index of the target in the array is: " + bSearch(nums3, nums3.length, 3));
+
+        System.out.println("\nSimulate recursion with Stack");
+        System.out.println("Sum from 1 to " + num + " using STACK is: " + sum(num));
     }
 
 
@@ -29,6 +33,19 @@ public class Main {
     public static int sum(int n) {
         if (n == 1) return 1;
         return n + sum(n - 1);
+    }
+    // Simulate Recursion
+    public static int sumStack(int n) {
+        Stack<Integer> stack = new Stack<Integer>();
+        while (n != 0) {
+            stack.push(n);
+            n--;
+        }
+
+        int res = 1;
+        while (!stack.empty()) res *= stack.pop();
+
+        return res;
     }
 
     /*
