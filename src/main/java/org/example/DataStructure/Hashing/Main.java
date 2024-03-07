@@ -1,6 +1,9 @@
 package org.example.DataStructure.Hashing;
 
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,6 +28,9 @@ public class Main {
         ht.put("am", 5);
         ht.put("english", 6);
         ht.put("learner", 7);
+
+
+        Queue<String> strings = new PriorityQueue<>(Collections.reverseOrder());
     }
 
     public static void testMyHashClass() {
