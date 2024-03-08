@@ -79,4 +79,12 @@ public class Heap<T> {
         arr[idxA] = arr[idxB];
         arr[idxB] = tmp;
     }
+
+    public T[] getArr() {
+        return arr;
+    }
+
+    public int getLastUsedIdx() {
+        return lastUsedIdx;
+    }
 }
