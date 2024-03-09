@@ -1,5 +1,7 @@
 package org.example.DataStructure.Trees.AVLTrees;
 
+import jdk.jshell.spi.ExecutionControl;
+
 public class AVLTree<T extends Comparable<T>> {
     private Node<T> root;
     private int size;
@@ -15,6 +17,23 @@ public class AVLTree<T extends Comparable<T>> {
         add(root, forAdd);
         size++;
         checkBalance(forAdd);
+    }
+
+    public void remove(T obj) {
+        if (root == null) return;
+        if (root.left == null && root.right == null && root.data.compareTo(obj) == 0) {
+            size = 0;
+            root = null;
+            return;
+        }
+
+        remove(obj, root);
+    }
+
+    private void remove(T obj, Node<T> node) {
+
+        // same logic like simple tree remove
+
     }
 
     private void checkBalance(Node<T> node) {
