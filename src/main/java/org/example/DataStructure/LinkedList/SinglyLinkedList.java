@@ -1,7 +1,6 @@
 package org.example.DataStructure.LinkedList;
 
 import org.example.DataStructure.LinkedList.Interfaces.List;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -130,7 +129,6 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         return sb.toString();
     }
 
-    @NotNull
     @Override
     public Iterator<T> iterator() {
         return new IteratorHelper();
