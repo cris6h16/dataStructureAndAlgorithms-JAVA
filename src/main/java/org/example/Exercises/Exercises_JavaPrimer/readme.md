@@ -29,4 +29,24 @@
 
 5. **R-1.5**:
     Write a short Java method that takes an integer `n` and returns the sum of all positive integers less than or equal to `n`.  
-    [Fifth solved](Fifth.java)
+    [Fifth solved](Fifth.java)  
+
+   
+6. **R-1.6**:
+    Write a short Java method that takes an integer `n` and return the sum of all the **odd** positive integer less than or equals to `n`  
+    [Sixth solved](Sixth.java)  
+
+
+7. **R-1.7**:
+    Write a short Java method that takes an integer `n` and returns the sum of the squares of all positive integers less than or equal to `n`  
+    [Seventh solved](Seventh.java)  
+
+
+8. **R-1.8**:
+    Write a short Java method that counts the number of vowels in a given character string  
+    [Eighth solved](Eighth.java) 
+
+
+9. **R-1.9**:
+    Write a short Java method that uses a `StringBuilder` instances to remove al the punctuation from a string `s` storing a sentence, for example, transforming the string "Let's try, Mike!" to "Lets try Mike".  
+    [Ninth solved](Ninth.java)
