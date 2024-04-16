@@ -24,4 +24,9 @@
 
 4. **R-1.4**:
     Write a short Java method, `isEven`, that takes an int `i` and returns `true` if and only if `i` is even. Your method cannot use the multiplication, modulus, or division operations, however.   
-    [Fourth solved](Four.java) 
+    [Fourth solved](Fourth.java)  
+
+
+5. **R-1.5**:
+    Write a short Java method that takes an integer `n` and returns the sum of all positive integers less than or equal to `n`.  
+    [Fifth solved](Fifth.java)
