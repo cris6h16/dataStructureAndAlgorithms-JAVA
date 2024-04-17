@@ -50,3 +50,19 @@
 9. **R-1.9**:
     Write a short Java method that uses a `StringBuilder` instances to remove al the punctuation from a string `s` storing a sentence, for example, transforming the string "Let's try, Mike!" to "Lets try Mike".  
     [Ninth solved](Ninth.java)
+
+
+10. **R-1.10**:
+    Write a Java Class, `Flower`, that has three instance variables of type `String`, `int` and `float`, which respectively represent the name of the flower, its number of petals, and price. Your cass must include a constructor method
+    that initializes each variable to an appropriate value, and your class should include methods for setting the value of each type, and getting the value of each type.  
+    [Tenth solved](Tenth.java)  
+
+
+11. **R-1.11**:
+    Modify the `CreditCard` class from Code Fragment 1.5 to include a method that updates the credit limits  
+    [Eleventh solution](Eleventh.java)  
+
+
+12. **R-1.12**:
+    Modify the `CreditCard` class from Code Fragment 1.5 so that ignores any request to process a negative payment amount.  
+    [Twelfth solution](Twelfth.java) 
