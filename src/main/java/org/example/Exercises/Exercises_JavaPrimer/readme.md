@@ -60,9 +60,17 @@
 
 11. **R-1.11**:
     Modify the `CreditCard` class from Code Fragment 1.5 to include a method that updates the credit limits  
-    [Eleventh solution](Eleventh.java)  
+    [Eleventh solved](Eleventh.java)  
 
 
 12. **R-1.12**:
     Modify the `CreditCard` class from Code Fragment 1.5 so that ignores any request to process a negative payment amount.  
-    [Twelfth solution](Twelfth.java) 
+    [Twelfth solved](Twelfth.java) 
+
+
+13. **R-1.13**:
+    Modify the declaration of the first **for** loop in the main method in code fragments 1.6 so that its charges will cause exactly 
+    one of the three credit cards to attempt to go over its credit limit. which credit card is it?  
+    [Thirteenth solved](Thirteenth.java)  
+
+//....

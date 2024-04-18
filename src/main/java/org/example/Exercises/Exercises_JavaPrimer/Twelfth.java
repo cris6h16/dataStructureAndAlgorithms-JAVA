@@ -12,7 +12,7 @@ public class Twelfth {
  * @author Michael H. Goldwasser
  * @author cris6h16
  */
-class CreditCard {
+class CreditCard2 {
 
     private String customer;
     private String bank;
@@ -28,7 +28,7 @@ class CreditCard {
      * @param account  the account identifier (e.g., "5391 0375 9387 5309")
      * @param limit    teh credit card limit (measured in dollars)
      */
-    public CreditCard(String customer, String bank, String account, int limit, double balance) {
+    public CreditCard2(String customer, String bank, String account, int limit, double balance) {
         this.customer = customer;
         this.bank = bank;
         this.account = account;
@@ -69,4 +69,5 @@ class CreditCard {
         if (limit < 0) return false;
         this.limit = newLimit;
         return true;
+    }
     }

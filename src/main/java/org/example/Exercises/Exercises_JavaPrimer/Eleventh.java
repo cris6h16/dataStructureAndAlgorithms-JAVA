@@ -42,7 +42,9 @@ class CreditCard {
      * @return {@code true} if charge was accepted, {@code false} if charge was denied
      */
     public boolean charge(double price) {
-        if (price + balance > limit) return false;
+        if (price + balance > limit) {
+            return false;
+        }
 
         balance += price;
         return true;
@@ -59,6 +61,7 @@ class CreditCard {
 
     /**
      * Update the credit limits
+     *
      * @param newLimit it'll be the new limit
      * @return {@code true} if was set, {@code false} otherwise
      */
@@ -66,5 +69,18 @@ class CreditCard {
         if (limit < 0) return false;
         this.limit = newLimit;
         return true;
+    }
+
+    //....
+
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "customer='" + customer + '\'' +
+                ", bank='" + bank + '\'' +
+                ", account='" + account + '\'' +
+                ", limit=" + limit +
+                ", balance=" + balance +
+                '}';
     }
 }
