@@ -1,0 +1,1 @@
+I want to mension that All of here are just practice, I took notes of the foundamental and relevant concepts on my personal digital NoteBook. In a future I try to add about graphs and document more (specificly the boundary cases of each)
