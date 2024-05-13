@@ -41,8 +41,7 @@ But this I'll do slowly because I do it when:
   - `50n` -> `n`
 - Ignore lower order terms
   - `3n^2 + 2n + 1` -> `n^2`
-  - `6n^3 + 2n^2 + 3n + 1` -> `n^3`
-  - `n/2 + log n` -> `n`
+  - `6n^3 + 2n^2 + 3n + 1` -> `n^3`   
 - ignore base of logarithm
   - we can change the base, the algorithm will be the same
   - `log_2(n)` -> `log(n)`
