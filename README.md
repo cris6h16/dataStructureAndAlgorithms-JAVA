@@ -10,7 +10,7 @@ But this I'll do slowly because I do it when:
 <br>
 
 
-# Content THat I've Learned   
+# Some Content THat I've Learned    
 ## Basic Algorithms   
 - Define what exactly is an algorithm   
 
