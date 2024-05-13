@@ -65,31 +65,32 @@ But this I'll do slowly because I do it when:
 - `n^3 = O(n^2)` -> `false`
 - `n^2 = O(n^3)` -> `true`
 - `n^2 = O(n^2)` -> `true`
-- `(n(n-1))/2 = O(n^2)` -> `true`
+- `(n(n-1))/2 = O(n^2)` -> `true`   
 
 
 - `(n(n-1))/2 = o(n^2)` -> `false`
 - `n^2 = o(n^3)` -> `true`
 - `n^2 = o(n^2)` -> `false`
-- `n^3 = o(n^4)` -> `true`
+- `n^3 = o(n^4)` -> `true`   
 
 
 - `n^4 = Ω(n^3)` -> `true`
 - `log n = Ω(1)` -> `true`
 - `n = Ω(log n)` -> `true`
 - `n = Ω(n)` -> `true`
-- `n = Ω(n^2)` -> `true`
+- `n = Ω(n^2)` -> `true`   
 
 
 - `n^2 = ω(n)` -> `true`
 - `n^3 = ω(n^2)` -> `true`
 - `log n = ω(1)` -> `true`
-- `n = ω(log n)` -> `true`
+- `n = ω(log n)` -> `true`   
 
 
 - `n^2 = Θ(n^2)` -> `true`
 - `n^2 = Θ(n^3)` -> `false`
 - `n^2 = Θ(n^2)` -> `true`
+
 
 ## Understand
 ### OOP
