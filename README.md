@@ -6,9 +6,12 @@ But this I'll do slowly because I do it when:
 - My teacher doesn't come & I have free hour
 - When I don't have Internet || Energy && I have charged my laptop
 - Any other moments in which I can't choose what do
+
 <br>
-# Content THat I've Learned
-## Basic Algorithms
+
+
+# Content THat I've Learned   
+## Basic Algorithms   
 - Define what exactly is an algorithm   
 
 
