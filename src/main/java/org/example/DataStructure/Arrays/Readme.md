@@ -10,7 +10,8 @@
 ### `addFirst()` in `O(1)`
 
 Instead of:   
-- `moveEachToItsNextPosition()` and later `arr[0] = <val>`   
+- `moveEachToItsNextPosition()` and later `arr[0] = <val>`
+
 Do:   
 - `addLast(<val>)`, later `swap(arr, idxLast, idxFirst)`
 
