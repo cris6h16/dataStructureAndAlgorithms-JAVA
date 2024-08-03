@@ -2,7 +2,10 @@ package org.example.DataStructure.Arrays;
 
 public class ContiguousArray {
     public static void unidimensional(String[] args) {
+        int arr[] = new int[5];
+        int arr2[] = {1, 2, 3, 4, 5};
         int[] array = new int[5];
+
         array[0] = 10;
         array[1] = 20;
         array[2] = 30;
