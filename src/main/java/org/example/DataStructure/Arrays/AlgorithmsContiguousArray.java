@@ -43,7 +43,7 @@ public class AlgorithmsContiguousArray {
             }
         }
 
-        int[] res = new int[odds];
+        Integer[] res = new Integer[odds];
         int idx = 0;
         for (int i = 0; (i < arr.length) && (idx <= res.length - 1); i++) {
             if (arr[i] % 2 != 0) {
