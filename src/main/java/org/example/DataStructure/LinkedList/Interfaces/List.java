@@ -1,20 +1,20 @@
 package org.example.DataStructure.LinkedList.Interfaces;
 
 public interface List<T extends Comparable<T>> {
-    void addFirst(T obj);
+    void addFirst(T val);
 
-    void addLast(T obj);
+    void addLast(T val);
 
     T removeFirst();
 
     T removeLast();
 
-    T remove(T obj);
+    T remove(T val);
 
     T peekFirst();
 
     T peekLast();
 
-    T contains(T obj);
+    boolean contains(T val);
 
 }
