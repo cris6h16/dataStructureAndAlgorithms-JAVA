@@ -16,6 +16,106 @@ public class Main {
         reverseAnArray();
         findMissingNumber();
         isPalindrome();
+
+        //
+        circularArrayContiguous();
+    }
+
+    private static void circularArrayContiguous() {
+        System.out.println("Creating a Circular Array Contiguous");
+        CircularArrayContiguous<Integer> obj = new CircularArrayContiguous<>(5);
+        System.out.println(obj);
+
+        appendAndPrint(obj, 1);
+        prependAndPrint(obj, -10);
+        appendAndPrint(obj, 2);
+        appendAndPrint(obj, 3);
+        appendAndPrint(obj, 4);
+        appendAndPrint(obj, 5);
+        appendAndPrint(obj, 6);
+        appendAndPrint(obj, 7);
+        /*
+
+        Creating a Circular Array Contiguous
+        Internal Array: [
+            null
+            null
+            null 	<- head 	<- tail
+            null
+            null
+        ]
+        Array to expose: [null, null, null, null, null]
+
+        Appending(TAIL): 1
+        Internal Array: [
+            null
+            null
+            1 	<- head
+            null 	<- tail
+            null
+        ]
+        Array to expose: [1, null, null, null, null]
+
+        Prepending(HEAD): -10
+        Internal Array: [
+            null
+            -10 	<- head
+            1
+            null 	<- tail
+            null
+        ]
+        Array to expose: [-10, 1, null, null, null]
+
+        Appending(TAIL): 2
+        Internal Array: [
+            null
+            -10 	<- head
+            1
+            2
+            null 	<- tail
+        ]
+        Array to expose: [-10, 1, 2, null, null]
+
+        Appending(TAIL): 3
+        Internal Array: [
+            null 	<- tail
+            -10 	<- head
+            1
+            2
+            3
+        ]
+        Array to expose: [-10, 1, 2, 3, null]
+
+        Appending(TAIL): 4
+        Internal Array: [
+            4
+            -10 	<- head 	<- tail
+            1
+            2
+            3
+        ]
+        Array to expose: [-10, 1, 2, 3, 4]
+
+        Appending(TAIL): 5
+        Exception in thread "main" org.example.DataStructure.Arrays.ArrayIsFullException
+            at org.example.DataStructure.Arrays.CircularArrayContiguous.isNotFull(CircularArrayContiguous.java:43)
+            at org.example.DataStructure.Arrays.CircularArrayContiguous.append(CircularArrayContiguous.java:24)
+            at org.example.DataStructure.Arrays.Main.appendAndPrint(Main.java:49)
+            at org.example.DataStructure.Arrays.Main.circularArrayContiguous(Main.java:36)
+            at org.example.DataStructure.Arrays.Main.main(Main.java:23)
+         */
+    }
+
+    private static <T> void prependAndPrint(CircularArrayContiguous<T> obj, T val) {
+        System.out.println("\nPrepending(HEAD): " + val);
+        obj.prepend(val);
+        System.out.println(obj);
+    }
+
+    static <T> void appendAndPrint(CircularArrayContiguous<T> arr, T val) {
+        System.out.println("\nAppending(TAIL): " + val);
+        arr.append(val);
+        System.out.println(arr);
     }
 
 

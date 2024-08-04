@@ -41,25 +41,62 @@ constructor:
     #              head - tail
     
 prepend(int val):
-    head = (head - 1 + fixedSize) % fixedSize;
+    head = goToLeft(head);
     arr[head] = val;
     
 # prepend(1)
-    # |   |   |   |   | 1  |   |   |   |   |   |
+    # |   |   |   | 1 |   |   |   |   |   |   |
     #               ^   ^
     #               |   |
     #            head   tail
 # prepend(2)
-    # |   |   |   | 2 | 1  |   |   |   |   |   |
+    # |   |   | 2 | 1 |   |   |   |   |   |   |
     #           ^       ^
     #           |       |
     #        head       tail
 # prepend(1 to 5)
-    # | 3 | 2 | 1 | 2 | 1  |   |   |   | 5 | 4 |
-    #                   ^            ^
-    #                   |            |
-    #                 tail          head
+    # | 2 | 1 | 2 | 1 |   |   |   | 5 | 4 | 3 |
+    #                   ^           ^
+    #                   |           |
+    #                 tail         head
 
 # etc.
+
+append(int val):
+    arr[tail] = val;
+    tail = goToRight(tail);
+    
+# append(1)
+    # |   |   |   |   | 1 |   |   |   |   |   |
+    #                   ^   ^
+    #                   |   |
+    #                 head  tail
+# append(2)
+    # |   |   |   |   | 1 | 2 |   |   |   |   |
+    #                   ^       ^
+    #                   |       |
+    #                 head      tail
+# append(1 to 5)
+    # | 5 |   |   |   | 1 | 2 | 1 | 2 | 3 | 4 |
+    #       ^           ^
+    #       |           |
+    #      tail        head
 ```
 
+### Key Points
+
+- `goToLeft(int idx)`:
+
+```java
+private int goLeft(int idx) {
+    return (idx - 1 + arr.length) % arr.length;
+}
+```
+
+- `goToRight(int idx)`:
+
+```java
+private int goRight(int idx) {
+    return (idx + 1) % arr.length;
+}
+```
