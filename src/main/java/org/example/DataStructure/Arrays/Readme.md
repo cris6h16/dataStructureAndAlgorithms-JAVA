@@ -1,5 +1,7 @@
 # Efficiency
 
+## See the [Main](Main.java)
+
 ## Contiguous Array
 
 | Method          | Eff    |
