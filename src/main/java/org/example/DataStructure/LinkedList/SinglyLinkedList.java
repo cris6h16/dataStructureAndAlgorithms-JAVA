@@ -20,7 +20,7 @@ Middle some Modification
  * @param <T> Generic Type
  * @author <a href="https://www.github.com/cris6h16" target="_blank">Cristian Herrera</a>
  */
-public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Iterable<T> {
+public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Iterable<T>, SinglyLinkedListAlgorithms {
     private Node<T> head, tail;
     private Integer size = 0; // Θ(1)
 
@@ -28,6 +28,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
      head = tail = n;    // 1 + 1 + 1   (assign, assign, access)
      head.next = tail;   // 1 + 1       (assign, access)
+     tail.next = null;   // 1 + 1       (assign, access)
      size++;             // 1 + 1 + 1   (assign, arithmetic operation, access)
      return null;        // 1           (return)
 
@@ -36,6 +37,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     private final Function<Node<T>, Void> _addNodeWhenIsEmpty = (n) -> {
         head = tail = n;
         head.next = tail;
+        tail.next = null;
         size++;
         return null;
     };
@@ -311,6 +313,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         StringBuilder sb = new StringBuilder();
         Node<T> c = head;
         while (c != null) {
+            System.out.println("While c: " + c.data);
             sb.append(c.data).append(" ");
             c = c.next;
         }
@@ -327,6 +330,18 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     public Iterator<T> iterator() {
         return new IteratorHelper();
     }
+
+    @Override
+    public void reverse() {
+//        reverse(null, head);
+    }
+
+//    private void reverse(Node<T> previous, Node<T> current) {
+//        if (current == null) return;
+//        Node<T> next = current.next;
+//        current.next = previous;
+//        reverse(current, next );
+//    }
 
 
     private class IteratorHelper implements Iterator<T> {
@@ -351,7 +366,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         }
     }
 
-    protected class Node<T> {
+    private class Node<T> {
         private T data;
         private Node<T> next;
 
