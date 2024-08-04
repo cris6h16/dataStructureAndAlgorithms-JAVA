@@ -1,17 +1,20 @@
 package org.example.DataStructure.Arrays;
 
 import java.util.Arrays;
+import java.util.function.Function;
 
 public class AlgorithmsContiguousArray {
 
     public static void main(String[] args) {
-        Integer[][] arr = {
-                {1, 2, 3, 4, 5, 6, 7, 8, -9, 10},
-                {1, 2, 3, 4, 5, 6, 7, 8, -9},
-                {-1, 2, 3, 4, 5, 6, 7, 8}
-        };
+        Integer[][] arr = new Integer[10][]; // initialize the array but not the inner arrays
 
 
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||||||||||||||| REMOVE EVEN INTEGERS |||||||||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
+        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
+        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
         System.out.printf(
                 "\n%s\n%s\n%s\n\n",
                 Arrays.toString(removeEvenIntegers(arr[0])),
@@ -24,6 +27,12 @@ public class AlgorithmsContiguousArray {
             [-1, 3, 5, 7]
          */
 
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||||||||||||||||| FIND THE MINIMUM |||||||||||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
+        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
+        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
         System.out.printf(
                 "\n%s\n%s\n%s\n\n",
                 findMinimum(arr[0], 0),
@@ -36,6 +45,12 @@ public class AlgorithmsContiguousArray {
             -1
          */
 
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||||||||||||| FIND THE SECOND GREATEST |||||||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
+        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
+        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
         System.out.printf(
                 "\n%s\n%s\n%s\n\n",
                 findSecondGreatest(arr[0]),
@@ -48,6 +63,44 @@ public class AlgorithmsContiguousArray {
             7
          */
 
+
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //|||||||||||| MOVE ALL ZEROS TO THE END |||||||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        arr[0] = new Integer[]{0, 2, 3, 4, 5, 6, 7, 8, -9, 0};
+        arr[1] = new Integer[]{1, 2, 3, 0, 5, 6, 7, 0, -9};
+        arr[2] = new Integer[]{-1, 0, 3, 4, 5, 6, 7, 0};
+        arr[3] = new Integer[]{0, 0, 0, 0, 0, 0, 0, 0};
+        arr[4] = new Integer[]{0, 0, 0, 0, 0, 0, 0, Integer.MIN_VALUE};
+
+        moveAllZerosToTheEnd(arr[0]);
+        moveAllZerosToTheEnd(arr[1]);
+        moveAllZerosToTheEnd(arr[2]);
+        moveAllZerosToTheEnd(arr[3]);
+        moveAllZerosToTheEnd(arr[4]);
+        System.out.printf(
+                "\n%s\n%s\n%s\n%s\n%s\n\n",
+                Arrays.toString(arr[0]),
+                Arrays.toString(arr[1]),
+                Arrays.toString(arr[2]),
+                Arrays.toString(arr[3]),
+                Arrays.toString(arr[4])
+        );
+        /*
+            [-9, 2, 3, 4, 5, 6, 7, 8, 0, 0]
+            [1, 2, 3, -9, 5, 6, 7, 0, 0]
+            [-1, 7, 3, 4, 5, 6, 0, 0]
+            [0, 0, 0, 0, 0, 0, 0, 0]
+            [-2147483648, 0, 0, 0, 0, 0, 0, 0]
+         */
+
+
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||||||||||||||||| REVERSE AN ARRAY |||||||||||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
+        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
+        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
         reverseAnArray(arr[0], 0, arr[0].length - 1);
         reverseAnArray(arr[1], 0, arr[1].length - 1);
         reverseAnArray(arr[2], 0, arr[2].length - 1);
@@ -62,6 +115,18 @@ public class AlgorithmsContiguousArray {
             [-9, 8, 7, 6, 5, 4, 3, 2, 1]
             [8, 7, 6, 5, 4, 3, 2, -1]
          */
+
+    }
+
+    private static <T extends Number> void moveAllZerosToTheEnd(T[] arr) {
+        int idxL = 0;               // left
+        int idxR = arr.length - 1;  // right
+        while (true) {
+            while (idxL <= arr.length - 1 && !arr[idxL].equals(0)) idxL++;
+            while (idxR >= 0 && arr[idxR].equals(0)) idxR--;
+            if (idxL > idxR) break;
+            _swap(arr, idxL, idxR);
+        }
     }
 
 
@@ -72,7 +137,6 @@ public class AlgorithmsContiguousArray {
                 odds++;
             }
         }
-
         Integer[] res = new Integer[odds];
         int idx = 0;
         for (int i = 0; (i < arr.length) && (idx <= res.length - 1); i++) {
@@ -90,14 +154,13 @@ public class AlgorithmsContiguousArray {
         T greatest = arr[0];
         T secondGreatest = null;
         for (T t : arr) {
-            if (t.compareTo(greatest) > 0) { // arr[i] > greatest
+            if (t.compareTo(greatest) > 0) { // t > greatest
                 secondGreatest = greatest;
                 greatest = t;
             } else if (t.compareTo(greatest) != 0 && (secondGreatest == null || t.compareTo(secondGreatest) > 0)) { // t != greatest && (secondGreatest == null || t > secondGreatest)
                 secondGreatest = t;
             }
         }
-
         return secondGreatest == null ? greatest : secondGreatest; // if there is no second greatest, return the greatest, we can throw an exception if we want
     }
 
