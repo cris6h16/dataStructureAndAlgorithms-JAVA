@@ -1,7 +1,6 @@
 package org.example.DataStructure.Arrays;
 
 import java.util.Arrays;
-import java.util.function.Function;
 
 public class AlgorithmsContiguousArray {
 
@@ -116,6 +115,72 @@ public class AlgorithmsContiguousArray {
             [8, 7, 6, 5, 4, 3, 2, -1]
          */
 
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||||||| FIND THE MISSING NUMBER IN AN ARRAY  |||||||\\
+        //|||||||||||||||| Complexity: O(n)  |||||||||||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||  Given an array of n - 1 distinct numbers in   ||\\
+        //||  the range of 1 to n, find the missing number  ||\\
+        //||  in it                                         ||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        arr[0] = new Integer[]{2, 3, 4, 5, 6, 7, 8, 9};   // 1  is missing: [ 1 ; 9 ]
+        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 8, 9};   // 7  is missing: [ 1 ; 9 ]
+        arr[2] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 9};   // 8  is missing: [ 1 ; 9 ]
+        arr[3] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8};   // 9 is missing:  [ 1 ; 9 ]
+        System.out.printf(
+                "\n%s\n%s\n%s\n%s\n\n",
+                findMissingNumber(arr[0]),
+                findMissingNumber(arr[1]),
+                findMissingNumber(arr[2]),
+                findMissingNumber(arr[3])
+        );
+        /*
+            1
+            7
+            8
+            9
+         */
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        //||||||||| CHECK IF AN STRING IS PALINDROME |||||||||\\
+        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
+        System.out.printf(
+                "\n%s\n%s\n%s\n\n",
+                isPalindrome("madam"),
+                isPalindrome("racecar"),
+                isPalindrome("hello")
+        );
+        /*
+            true
+            true
+            false
+         */
+
+
+    }
+
+    private static boolean isPalindrome(String str) {
+        boolean is = true;
+        char[] chars = str.toCharArray();
+        int idxStart = 0;
+        int idxEnd = chars.length - 1;
+        while (idxStart <= idxEnd) {
+            if (chars[idxStart] != chars[idxEnd]) {
+                is = false;
+                break;
+            }
+            idxStart++;
+            idxEnd--;
+        }
+        return is;
+    }
+
+    // 1 + 2 + 3 + ... = sum
+    // sum = n ( n + 1 ) / 2
+    private static Integer findMissingNumber(Integer[] arr) {
+        int n = arr.length + 1;
+        int sum = n * (n + 1) / 2;
+        for (int val : arr) sum -= val;
+        return sum;
     }
 
     private static <T extends Number> void moveAllZerosToTheEnd(T[] arr) {
