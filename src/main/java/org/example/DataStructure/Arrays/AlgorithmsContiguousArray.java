@@ -85,17 +85,22 @@ public class AlgorithmsContiguousArray {
     }
 
     public static <T extends Comparable<T>> T findSecondGreatest(T[] arr) {
+        if (arr.length < 2) throw new IllegalArgumentException();
+
         T greatest = arr[0];
-        T secondGreatest = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i].compareTo(greatest) > 0) { // arr[i] > greatest
-                T tmp = greatest;
-                greatest = arr[i];
-                secondGreatest = tmp;
+        T secondGreatest = null;
+        for (T t : arr) {
+            if (t.compareTo(greatest) > 0) { // arr[i] > greatest
+                secondGreatest = greatest;
+                greatest = t;
+            } else if (t.compareTo(greatest) != 0 && (secondGreatest == null || t.compareTo(secondGreatest) > 0)) { // t != greatest && (secondGreatest == null || t > secondGreatest)
+                secondGreatest = t;
             }
         }
-        return secondGreatest;
+
+        return secondGreatest == null ? greatest : secondGreatest; // if there is no second greatest, return the greatest, we can throw an exception if we want
     }
+
 
     public static <T extends Comparable<T>> T findMinimum(T[] arr, int idxStart) {
         if (idxStart == arr.length - 1) return arr[idxStart];
