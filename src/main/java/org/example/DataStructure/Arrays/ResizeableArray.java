@@ -10,6 +10,7 @@ public class ResizeableArray<T> {
         lastIdx = 0;
     }
 
+
     public void add(T val) {
         if (isFull()) resize();
         arr[lastIdx++] = val;

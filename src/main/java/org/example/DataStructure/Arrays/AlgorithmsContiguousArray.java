@@ -1,164 +1,9 @@
 package org.example.DataStructure.Arrays;
 
-import java.util.Arrays;
-
 public class AlgorithmsContiguousArray {
 
-    public static void main(String[] args) {
-        Integer[][] arr = new Integer[10][]; // initialize the array but not the inner arrays
 
-
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||||||||||||||| REMOVE EVEN INTEGERS |||||||||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
-        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
-        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
-        System.out.printf(
-                "\n%s\n%s\n%s\n\n",
-                Arrays.toString(removeEvenIntegers(arr[0])),
-                Arrays.toString(removeEvenIntegers(arr[1])),
-                Arrays.toString(removeEvenIntegers(arr[2]))
-        );
-        /*
-            [1, 3, 5, 7, -9]
-            [1, 3, 5, 7, -9]
-            [-1, 3, 5, 7]
-         */
-
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||||||||||||||||| FIND THE MINIMUM |||||||||||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
-        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
-        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
-        System.out.printf(
-                "\n%s\n%s\n%s\n\n",
-                findMinimum(arr[0], 0),
-                findMinimum(arr[1], 0),
-                findMinimum(arr[2], 0)
-        );
-        /*
-            -9
-            -9
-            -1
-         */
-
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||||||||||||| FIND THE SECOND GREATEST |||||||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
-        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
-        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
-        System.out.printf(
-                "\n%s\n%s\n%s\n\n",
-                findSecondGreatest(arr[0]),
-                findSecondGreatest(arr[1]),
-                findSecondGreatest(arr[2])
-        );
-        /*
-            8
-            7
-            7
-         */
-
-
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //|||||||||||| MOVE ALL ZEROS TO THE END |||||||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        arr[0] = new Integer[]{0, 2, 3, 4, 5, 6, 7, 8, -9, 0};
-        arr[1] = new Integer[]{1, 2, 3, 0, 5, 6, 7, 0, -9};
-        arr[2] = new Integer[]{-1, 0, 3, 4, 5, 6, 7, 0};
-        arr[3] = new Integer[]{0, 0, 0, 0, 0, 0, 0, 0};
-        arr[4] = new Integer[]{0, 0, 0, 0, 0, 0, 0, Integer.MIN_VALUE};
-
-        moveAllZerosToTheEnd(arr[0]);
-        moveAllZerosToTheEnd(arr[1]);
-        moveAllZerosToTheEnd(arr[2]);
-        moveAllZerosToTheEnd(arr[3]);
-        moveAllZerosToTheEnd(arr[4]);
-        System.out.printf(
-                "\n%s\n%s\n%s\n%s\n%s\n\n",
-                Arrays.toString(arr[0]),
-                Arrays.toString(arr[1]),
-                Arrays.toString(arr[2]),
-                Arrays.toString(arr[3]),
-                Arrays.toString(arr[4])
-        );
-        /*
-            [-9, 2, 3, 4, 5, 6, 7, 8, 0, 0]
-            [1, 2, 3, -9, 5, 6, 7, 0, 0]
-            [-1, 7, 3, 4, 5, 6, 0, 0]
-            [0, 0, 0, 0, 0, 0, 0, 0]
-            [-2147483648, 0, 0, 0, 0, 0, 0, 0]
-         */
-
-
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||||||||||||||||| REVERSE AN ARRAY |||||||||||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        arr[0] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9, 10};
-        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, -9};
-        arr[2] = new Integer[]{-1, 2, 3, 4, 5, 6, 7, 8};
-        reverseAnArray(arr[0], 0, arr[0].length - 1);
-        reverseAnArray(arr[1], 0, arr[1].length - 1);
-        reverseAnArray(arr[2], 0, arr[2].length - 1);
-        System.out.printf(
-                "\n%s\n%s\n%s\n\n",
-                Arrays.toString(arr[0]),
-                Arrays.toString(arr[1]),
-                Arrays.toString(arr[2])
-        );
-        /*
-            [10, -9, 8, 7, 6, 5, 4, 3, 2, 1]
-            [-9, 8, 7, 6, 5, 4, 3, 2, 1]
-            [8, 7, 6, 5, 4, 3, 2, -1]
-         */
-
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||||||| FIND THE MISSING NUMBER IN AN ARRAY  |||||||\\
-        //|||||||||||||||| Complexity: O(n)  |||||||||||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||  Given an array of n - 1 distinct numbers in   ||\\
-        //||  the range of 1 to n, find the missing number  ||\\
-        //||  in it                                         ||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        arr[0] = new Integer[]{2, 3, 4, 5, 6, 7, 8, 9};   // 1  is missing: [ 1 ; 9 ]
-        arr[1] = new Integer[]{1, 2, 3, 4, 5, 6, 8, 9};   // 7  is missing: [ 1 ; 9 ]
-        arr[2] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 9};   // 8  is missing: [ 1 ; 9 ]
-        arr[3] = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8};   // 9 is missing:  [ 1 ; 9 ]
-        System.out.printf(
-                "\n%s\n%s\n%s\n%s\n\n",
-                findMissingNumber(arr[0]),
-                findMissingNumber(arr[1]),
-                findMissingNumber(arr[2]),
-                findMissingNumber(arr[3])
-        );
-        /*
-            1
-            7
-            8
-            9
-         */
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        //||||||||| CHECK IF AN STRING IS PALINDROME |||||||||\\
-        //||||||||||||||||||||||||||||||||||||||||||||||||||||\\
-        System.out.printf(
-                "\n%s\n%s\n%s\n\n",
-                isPalindrome("madam"),
-                isPalindrome("racecar"),
-                isPalindrome("hello")
-        );
-        /*
-            true
-            true
-            false
-         */
-
-
-    }
-
-    private static boolean isPalindrome(String str) {
+    static boolean isPalindrome(String str) {
         boolean is = true;
         char[] chars = str.toCharArray();
         int idxStart = 0;
@@ -176,14 +21,14 @@ public class AlgorithmsContiguousArray {
 
     // 1 + 2 + 3 + ... = sum
     // sum = n ( n + 1 ) / 2
-    private static Integer findMissingNumber(Integer[] arr) {
+    static Integer findMissingNumber(Integer[] arr) {
         int n = arr.length + 1;
         int sum = n * (n + 1) / 2;
         for (int val : arr) sum -= val;
         return sum;
     }
 
-    private static <T extends Number> void moveAllZerosToTheEnd(T[] arr) {
+    static <T extends Number> void moveAllZerosToTheEnd(T[] arr) {
         int idxL = 0;               // left
         int idxR = arr.length - 1;  // right
         while (true) {
