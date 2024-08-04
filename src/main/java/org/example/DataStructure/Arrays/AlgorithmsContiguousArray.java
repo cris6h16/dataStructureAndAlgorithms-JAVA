@@ -6,31 +6,61 @@ public class AlgorithmsContiguousArray {
 
     public static void main(String[] args) {
         Integer[][] arr = {
-                {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-                {1, 2, 3, 4, 5, 6, 7, 8, 9},
-                {1, 2, 3, 4, 5, 6, 7, 8}
+                {1, 2, 3, 4, 5, 6, 7, 8, -9, 10},
+                {1, 2, 3, 4, 5, 6, 7, 8, -9},
+                {-1, 2, 3, 4, 5, 6, 7, 8}
         };
 
 
-        _print(
-                removeEvenIntegers(arr[0]),
-                removeEvenIntegers(arr[1]),
-                removeEvenIntegers(arr[2])
+        System.out.printf(
+                "\n%s\n%s\n%s\n\n",
+                Arrays.toString(removeEvenIntegers(arr[0])),
+                Arrays.toString(removeEvenIntegers(arr[1])),
+                Arrays.toString(removeEvenIntegers(arr[2]))
         );
         /*
-        [1, 3, 5, 7, 9]
-        [1, 3, 5, 7, 9]
-        [1, 3, 5, 7]
+            [1, 3, 5, 7, -9]
+            [1, 3, 5, 7, -9]
+            [-1, 3, 5, 7]
+         */
+
+        System.out.printf(
+                "\n%s\n%s\n%s\n\n",
+                findMinimum(arr[0], 0),
+                findMinimum(arr[1], 0),
+                findMinimum(arr[2], 0)
+        );
+        /*
+            -9
+            -9
+            -1
+         */
+
+        System.out.printf(
+                "\n%s\n%s\n%s\n\n",
+                findSecondGreatest(arr[0]),
+                findSecondGreatest(arr[1]),
+                findSecondGreatest(arr[2])
+        );
+        /*
+            8
+            7
+            7
          */
 
         reverseAnArray(arr[0], 0, arr[0].length - 1);
         reverseAnArray(arr[1], 0, arr[1].length - 1);
         reverseAnArray(arr[2], 0, arr[2].length - 1);
-        _print(arr);
+        System.out.printf(
+                "\n%s\n%s\n%s\n\n",
+                Arrays.toString(arr[0]),
+                Arrays.toString(arr[1]),
+                Arrays.toString(arr[2])
+        );
         /*
-        [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-        [9, 8, 7, 6, 5, 4, 3, 2, 1]
-        [8, 7, 6, 5, 4, 3, 2, 1]
+            [10, -9, 8, 7, 6, 5, 4, 3, 2, 1]
+            [-9, 8, 7, 6, 5, 4, 3, 2, 1]
+            [8, 7, 6, 5, 4, 3, 2, -1]
          */
     }
 
@@ -54,7 +84,26 @@ public class AlgorithmsContiguousArray {
         return res;
     }
 
-    public static int
+    public static <T extends Comparable<T>> T findSecondGreatest(T[] arr) {
+        T greatest = arr[0];
+        T secondGreatest = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].compareTo(greatest) > 0) { // arr[i] > greatest
+                T tmp = greatest;
+                greatest = arr[i];
+                secondGreatest = tmp;
+            }
+        }
+        return secondGreatest;
+    }
+
+    public static <T extends Comparable<T>> T findMinimum(T[] arr, int idxStart) {
+        if (idxStart == arr.length - 1) return arr[idxStart];
+        else if (idxStart > arr.length - 1) throw new IllegalArgumentException();
+        T current = arr[idxStart];
+        T minimum = findMinimum(arr, idxStart + 1);
+        return minimum.compareTo(current) < 0 ? minimum : current;
+    }
 
     public static <T> void reverseAnArray(T[] arr, int idxStart, int idxEnd) {
         if (idxStart >= idxEnd) return;
@@ -68,9 +117,5 @@ public class AlgorithmsContiguousArray {
         arr[idx2] = tmp;
     }
 
-    public static <T> void _print(T[]... arr) {
-        for (T[] a : arr) {
-            System.out.println(Arrays.toString(a));
-        }
-    }
+
 }
