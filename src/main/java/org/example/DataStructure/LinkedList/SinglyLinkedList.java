@@ -14,13 +14,15 @@ End Add/Remove
 Middle some Modification
  */
 
+// todo: add the boundaries on each data structure && add the time units on each method
+
 /**
  * My Singly Linked List Implementation, this is my practice to understand better therefore this is untested ( not ready to be used )
  *
  * @param <T> Generic Type
  * @author <a href="https://www.github.com/cris6h16" target="_blank">Cristian Herrera</a>
  */
-public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Iterable<T>, SinglyLinkedListAlgorithms {
+public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Iterable<T>, SinglyLinkedListAlgorithms<T>, Cloneable {
     private Node<T> head, tail;
     private Integer size = 0; // Θ(1)
 
@@ -50,6 +52,9 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     public SinglyLinkedList(T val) {
         Node<T> n = new Node<>(val, null);
         _addNodeWhenIsEmpty.apply(n);
+    }
+
+    public SinglyLinkedList() {
     }
 
     /* Time Units: 17 || 12 => Θ(1)
@@ -288,39 +293,51 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         return size;
     }
 
-    /* Time Units: 14 + n ( 10 + 2? ) + a => O(n)
-    a = toString() time units
-    ? = append() time units
-    PD: I assume append() & toString() is 1
+    /* Time Units:
+    Worst: 13 + 2? + n ( 14 + 2? ) + a => O(n)
+    PD: I'm gonna assume that
+            -   append() -> ?
+            -   toString() -> a
+        require 1 time unit
 
-    StringBuilder sb = new StringBuilder();             // 1 + 1 => 2                                           ( new, assign )
-    Node<T> c = head;                                   // 1 + 1 => 2                                           ( access, assign )
-    while (c != null) {                                 // 1 + 1 || ( n + 1 ) ( 1 + 1 ) => 2n + 2               ( access, comparison )
-        sb.append(c.data).append(" ");                  // ( n ) * ( 1 + 1 + ? + 1 + 1 + 1 + ? ) => 5n + 2n?    ( access, call, append(), access, access, call, append() )
-        c = c.next;                                     // ( n ) * ( 1 + 1 + 1 ) => 3n                          ( access, access, assign )
+
+    StringBuilder sb = new StringBuilder();     // 1 + 1                    => 2                (new, assign)
+    Node<T> c = head;                           // 1 + 1                    => 2                (access, assign)
+    sb.append("[");                             // 1 + 1 + ?                => 2 + ?            (access, access, append())
+    while (c != null) {                         // ( n + 1 ) * ( 1 + 1 )    => 2n + 2           (access, comparison)
+        sb.append(c.data);                      // n ( 1 + 1 + 1 + 1 + ? )  => 4n + ?n          (access, access, access, access, append())
+        if (c.next != null) {                   // n ( 1 + 1 + 1 )          => 3n               (access, access, comparison)
+            sb.append(" -> ");                  // ( n - 1 ) * ( 1 + 1 + ? )=> 2n + ?n - 2 - ?  (access, access, append())
+        }
+        c = c.next;                             // n ( 1 + 1 + 1 )          => 3n               (access, access, assign)
     }
-    sb.append("\nsize: ").append(size).append("\n");    // 1 + 1 + ? + 1 + 1 + ? + 1 + ? => 5 + 2?              ( access, call, append(), call, access, append(), call, append() )
+    sb.append("]\nSize: ").append(size);        // 1 + 1 + ? + 1 + 1 + ?    => 4 + 2?           (access, access, append(), access, access, append())
 
-    return sb.toString();                               // 1 + 1 + a + 1 => 3 + a                              ( access, access, toString(), return )
+    return sb.toString();                       // 1 + 1 + a + 1            => 3 + a            (access, access, toString(), return)
 
-
-    2 + 2 + 2n + 2 + 5n + 2n? + 3n + 5 + 2? + 3 + a
-    = 14 + 10n + 2n? + a
-    = 14 + n ( 10 + 2? ) + a
+    2 + 2 + 2 + ? + 2n + 2 + 4n + ?n + 3n + 2n + ?n - 2 - ? + 3n + 4 + 2? + 3 + a
+    = 13 + 2? + 14n + 2?n + a
+    = 13 + 2? + n ( 14 + 2? ) + a
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Node<T> c = head;
+        sb.append("[");
         while (c != null) {
-            System.out.println("While c: " + c.data);
-            sb.append(c.data).append(" ");
+            if (c == head) sb.append("(head)");
+            sb.append(c.data);
+            if (c == tail) sb.append("(tail)");
+            if (c.next != null) {
+                sb.append(" -> ");
+            }
             c = c.next;
         }
-        sb.append("\nsize: ").append(size).append("\n");
+        sb.append("]\nSize: ").append(size);
 
         return sb.toString();
     }
+
 
     /* Time Units: 2 => Θ(1)
 
@@ -333,16 +350,136 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
     @Override
     public void reverse() {
-//        reverse(null, head);
+        reverse(null, head);
+        Node<T> tmp = head;
+        head = tail;
+        tail = tmp;
     }
 
-//    private void reverse(Node<T> previous, Node<T> current) {
-//        if (current == null) return;
-//        Node<T> next = current.next;
-//        current.next = previous;
-//        reverse(current, next );
-//    }
+    @Override
+    public T getNthFromEnd(int Nth) {
+        if (Nth > size || Nth < 1) return null;
+        int idxFromHead = size - Nth;   // position from head
+        Node<T> c = head;
+        int i = 0;
+        while (idxFromHead != i) {
+            c = c.next;
+            i++;
+        }
+        return c.data;
+    } // ASOTI
 
+    // we work with pointers, thats why I not reassign the head
+    @Override
+    public void removeDuplicatesUnsorted() {
+        Node<T> firstDistinct = head;
+
+        while (firstDistinct != null) {
+            Node<T> previousWalker = firstDistinct;
+            Node<T> walker = firstDistinct.next;
+
+            while (walker != null) {
+                boolean walkerFirstDistinctEquals = firstDistinct.data.compareTo(walker.data) == 0;
+                if (walkerFirstDistinctEquals) {
+                    previousWalker.next = walker.next;
+                    walker = walker.next;
+                    size--;
+                    continue;
+                }
+                previousWalker = walker;
+                walker = walker.next;
+            }
+            if (firstDistinct.next == null) tail = firstDistinct;
+            firstDistinct = firstDistinct.next;
+        }
+    }
+
+    @Override
+    public void removeDuplicatesSorted() {
+        Node<T> c = head;
+        while (c != null && c.next != null) {
+            if (c.data.compareTo(c.next.data) == 0) {
+                c.next = c.next.next;
+            }
+            c = c.next;
+        }
+    }
+
+    @Override
+    public T findStartOfLoop() {
+
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public void removeLoop() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public void sort() {
+        swapLowestInTheFirst(head);
+    }
+
+    private void swapLowestInTheFirst(Node<T> node) {
+        if (node == null) return; // stop
+
+        Node<T> c = node;
+        Node<T> lowest = node;
+        Node<T> preLowest = null;
+
+        while (c != null) {
+            if (c.data.compareTo(lowest.data) < 0) {
+                preLowest = lowest;
+                lowest = c;
+            }
+            c = c.next;
+        }
+        boolean lowestAlreadyIsHead = preLowest == null;
+        if (!lowestAlreadyIsHead) {
+            // reached here I have: HEAD, PRELOWEST, LOWEST
+
+            Node<T> nextHead = node.next;
+            preLowest.next = node;
+            node.next = lowest.next;
+            lowest.next = nextHead;
+        }
+        swapLowestInTheFirst(lowest.next);
+
+//        todo: implement a sort method: quick || merge
+    }
+
+
+    @Override
+    public void mergeSorted(SinglyLinkedList<T> list2) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public SinglyLinkedList<T> addTwoLists(SinglyLinkedList<T> list2) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    private void reverse(Node<T> previous, Node<T> current) {
+        if (current == null) return;
+        Node<T> next = current.next;
+        current.next = previous;
+        reverse(current, next);
+    }
+
+    @Override
+    protected SinglyLinkedList<T> clone() {
+        Node<T> c = head;
+        SinglyLinkedList<T> list = new SinglyLinkedList<>();
+
+        if (head == null) return list;
+
+        while (c != null) {
+            list.addLast(c.data);
+            c = c.next;
+        }
+        return list;
+    }
 
     private class IteratorHelper implements Iterator<T> {
         Node<T> node;
