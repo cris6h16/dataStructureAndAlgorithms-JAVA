@@ -13,7 +13,7 @@ public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
 
     void removeLoop();
 
-    void sort();
+    void mergeSort();
 
     /*
     Merge 2 sorted Singly Linked Lists
@@ -22,7 +22,7 @@ public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
     l2:     2 -> 4 -> 6 -> 10
     res:    1 -> 2 -> 3 -> 4 -> 6 -> 10 -> 25
      */
-    void mergeSorted(SinglyLinkedList<T> list2);
+    void mergeASortedList(SinglyLinkedList<T> list2);
     /*
         ALGORITHM: Add 2 Singly Linked Lists
 

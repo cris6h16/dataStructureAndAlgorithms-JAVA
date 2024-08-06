@@ -417,47 +417,60 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     }
 
     @Override
-    public void sort() {
-        mergeSort(head, 1, size);
+    public void mergeSort() {
+        head = mergeSort(head, size);
+        tail = getNode(head, size); // todo: this can be optimized
     }
 
-    private void mergeSort(Node<T> node, int from, int to) {
-        int size = to - from + 1;
-        if (size < 2) return;
+    private Node<T> mergeSort(Node<T> node, int size) {
+        if (size < 2) return node;
 
-        Node<T> mid = getNode(node, size / 2);
+        int mid = size / 2;
+        Node<T> midNode = getNode(node, mid ); // midNode: last node of the left part
         Node<T> left = node;
-        Node<T> right = mid.next;
-        mid.next = null;
+        Node<T> right = midNode.next;
+        midNode.next = null;
 
-        mergeSort(left, 1, size / 2);
-        mergeSort(right, 1, size % 2 == 0 ? (size / 2) : (size / 2) + 1);
+        Node<T> leftSorted = mergeSort(left, mid);
+        Node<T> rightSorted = mergeSort(right, size - mid);
 
-        merge(left, right);
+        return merge(leftSorted, rightSorted);
     }
 
-    private void merge(Node<T> left, Node<T> right) {
-        while (left != null && right != null) {
-            if (left.data.compareTo(right.data) < 0) {
-                left.next =
+    private Node<T> merge(Node<T> left, Node<T> right) {
+        Node<T> dummyHead = new Node<>(null, null);
+        Node<T> c = dummyHead;
 
+        while (left != null && right != null) {
+            if (left.data.compareTo(right.data) <= 0) {
+                c.next = left;
+                left = left.next;
             } else {
-                head.next = right;
+                c.next = right;
                 right = right.next;
             }
+            c = c.next;
         }
 
-        w
+        if (left != null) {
+            c.next = left;
+        } else {
+            c.next = right;
+        }
 
+        return dummyHead.next;
     }
 
-    private Node<T> getNode(Node<T> node, int position) { // start from 0
-        while (position-- != 1) node = node.next;
+    private Node<T> getNode(Node<T> node, int Nth) {
+        for (int i = 1; i < Nth && node != null; i++) {
+            node = node.next;
+        }
         return node;
     }
 
+
     @Override
-    public void mergeSorted(SinglyLinkedList<T> list2) {
+    public void mergeASortedList(SinglyLinkedList<T> list2) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 

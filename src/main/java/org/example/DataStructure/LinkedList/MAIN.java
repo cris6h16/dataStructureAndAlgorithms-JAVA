@@ -147,18 +147,18 @@ public class MAIN {
         var list2Clone = clonePrintSortPrint(list);
 
         removeDuplicatesUnsortedAndPrint(list);
-//        removeDuplicatesSortedAndPrint(list2Clone);
+        removeDuplicatesSortedAndPrint(list2Clone);
 
-        list2Clone.sort();
+
 
     }
 
     private static <T extends Comparable<T>> SinglyLinkedList<T> clonePrintSortPrint(SinglyLinkedList<T> list) {
         SinglyLinkedList<T> l = list.clone();
-        System.out.println("\nOriginal: " + list);
-        System.out.println("\nCloned: " + l);
-//        l.sort();
-//        System.out.println("Sorted: " + l);
+        System.out.println("\nOriginal:     " + list);
+        System.out.println("Cloned:       " + l);
+        l.mergeSort();
+        System.out.println("Merge Sorted: " + l);
         return l;
     }
 
