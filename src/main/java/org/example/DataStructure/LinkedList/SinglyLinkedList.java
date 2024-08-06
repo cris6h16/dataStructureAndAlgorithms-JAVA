@@ -407,8 +407,33 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     }
 
     @Override
-    public T findStartOfLoop() {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public T findStartOfALoop() {
+        if (size < 1) return null;
+        if (head == null) throw new IllegalStateException();
+
+        /* making a loop
+        int i= 0;
+        Node<T> c = head;
+        while (i++ != size /2){
+            c = c.next;
+        }
+        tail.next = c;
+         */
+
+        Node<T> loopNode = new Node<>(null, null);
+        Node<T> walker = head;
+        Node<T> walkerX2 = head;
+
+        while (walkerX2 != null && walkerX2.next != null) {
+            walkerX2 = walkerX2.next.next;
+
+            if (walker == walkerX2) {
+                loopNode = walker;
+                break;
+            }
+            walker = walker.next;
+        }
+        return loopNode.data;
     }
 
     @Override
@@ -431,7 +456,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         if (size < 2) return node;
 
         int mid = size / 2;
-        Node<T> midNode = getNode(node, mid ); // midNode: last node of the left part
+        Node<T> midNode = getNode(node, mid); // midNode: last node of the left part
         Node<T> left = node;
         Node<T> right = midNode.next;
         midNode.next = null;

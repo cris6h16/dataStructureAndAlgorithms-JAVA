@@ -235,6 +235,13 @@ public class MAIN {
          */
 
 
+        System.out.printf("\n\nlist: %s\nfindStartOfALoop: %s\n", list2, list2.findStartOfALoop());
+        /*
+            list: [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
+            Size: 7
+            findStartOfALoop: null
+         */
+
     }
 
     private static <T extends Comparable<T>> SinglyLinkedList<T> clonePrintMergeSortPrint(SinglyLinkedList<T> list) {

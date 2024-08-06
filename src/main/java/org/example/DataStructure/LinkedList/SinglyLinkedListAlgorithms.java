@@ -9,7 +9,7 @@ public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
 
     void removeDuplicatesSorted();
 
-    T findStartOfLoop();
+    T findStartOfALoop();
 
     void removeLoop();
 
