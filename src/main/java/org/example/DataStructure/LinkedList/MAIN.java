@@ -149,6 +149,7 @@ public class MAIN {
         removeDuplicatesUnsortedAndPrint(list);
 //        removeDuplicatesSortedAndPrint(list2Clone);
 
+        list2Clone.sort();
 
     }
 

@@ -418,37 +418,43 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
     @Override
     public void sort() {
-        swapLowestInTheFirst(head);
+        mergeSort(head, 1, size);
     }
 
-    private void swapLowestInTheFirst(Node<T> node) {
-        if (node == null) return; // stop
+    private void mergeSort(Node<T> node, int from, int to) {
+        int size = to - from + 1;
+        if (size < 2) return;
 
-        Node<T> c = node;
-        Node<T> lowest = node;
-        Node<T> preLowest = null;
+        Node<T> mid = getNode(node, size / 2);
+        Node<T> left = node;
+        Node<T> right = mid.next;
+        mid.next = null;
 
-        while (c != null) {
-            if (c.data.compareTo(lowest.data) < 0) {
-                preLowest = lowest;
-                lowest = c;
+        mergeSort(left, 1, size / 2);
+        mergeSort(right, 1, size % 2 == 0 ? (size / 2) : (size / 2) + 1);
+
+        merge(left, right);
+    }
+
+    private void merge(Node<T> left, Node<T> right) {
+        while (left != null && right != null) {
+            if (left.data.compareTo(right.data) < 0) {
+                left.next =
+
+            } else {
+                head.next = right;
+                right = right.next;
             }
-            c = c.next;
         }
-        boolean lowestAlreadyIsHead = preLowest == null;
-        if (!lowestAlreadyIsHead) {
-            // reached here I have: HEAD, PRELOWEST, LOWEST
 
-            Node<T> nextHead = node.next;
-            preLowest.next = node;
-            node.next = lowest.next;
-            lowest.next = nextHead;
-        }
-        swapLowestInTheFirst(lowest.next);
+        w
 
-//        todo: implement a sort method: quick || merge
     }
 
+    private Node<T> getNode(Node<T> node, int position) { // start from 0
+        while (position-- != 1) node = node.next;
+        return node;
+    }
 
     @Override
     public void mergeSorted(SinglyLinkedList<T> list2) {
