@@ -400,6 +400,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         while (c != null && c.next != null) {
             if (c.data.compareTo(c.next.data) == 0) {
                 c.next = c.next.next;
+                continue;
             }
             c = c.next;
         }
@@ -407,7 +408,6 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
     @Override
     public T findStartOfLoop() {
-
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
@@ -420,6 +420,11 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     public void mergeSort() {
         head = mergeSort(head, size);
         tail = getNode(head, size); // todo: this can be optimized
+    }
+
+    @Override
+    public void quickSort() {
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     private Node<T> mergeSort(Node<T> node, int size) {

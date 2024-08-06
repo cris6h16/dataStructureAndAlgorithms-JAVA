@@ -143,17 +143,101 @@ public class MAIN {
         addAndPrint(list2, 7, false);
         addAndPrint(list2, 0, true);
         addAndPrint(list2, 0, false);
+/*
+        //------------- test removeDuplicates -------------\\
 
-        var list2Clone = clonePrintSortPrint(list);
+        Created: [(head)1(tail)]
+        Size: 1
 
-        removeDuplicatesUnsortedAndPrint(list);
+        Added 1 to last
+        toString: [(head)1 -> 1(tail)]
+        Size: 2
+
+        Added 2 to first
+        toString: [(head)2 -> 1 -> 1(tail)]
+        Size: 3
+
+        Added 1 to last
+        toString: [(head)2 -> 1 -> 1 -> 1(tail)]
+        Size: 4
+
+        Added 1 to last
+        toString: [(head)2 -> 1 -> 1 -> 1 -> 1(tail)]
+        Size: 5
+
+        Added 4 to last
+        toString: [(head)2 -> 1 -> 1 -> 1 -> 1 -> 4(tail)]
+        Size: 6
+
+        Added 3 to first
+        toString: [(head)3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4(tail)]
+        Size: 7
+
+        Added 3 to first
+        toString: [(head)3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4(tail)]
+        Size: 8
+
+        Added 5 to last
+        toString: [(head)3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5(tail)]
+        Size: 9
+
+        Added 2 to first
+        toString: [(head)2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5(tail)]
+        Size: 10
+
+        Added 4 to last
+        toString: [(head)2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4(tail)]
+        Size: 11
+
+        Added 4 to last
+        toString: [(head)2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4(tail)]
+        Size: 12
+
+        Added 7 to first
+        toString: [(head)7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4(tail)]
+        Size: 13
+
+        Added 7 to last
+        toString: [(head)7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7(tail)]
+        Size: 14
+
+        Added 0 to first
+        toString: [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7(tail)]
+        Size: 15
+
+        Added 0 to last
+        toString: [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
+        Size: 16
+
+ */
+        var list2Clone = clonePrintMergeSortPrint(list2);
+        /*
+            Original:     [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
+            Size: 16
+            Cloned:       [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
+            Size: 16
+            Merge Sorted: [(head)0 -> 0 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
+            Size: 16
+         */
+
+        removeDuplicatesUnsortedAndPrint(list2);
         removeDuplicatesSortedAndPrint(list2Clone);
+        /*
+            Before removeDuplicatesUnsorted: [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
+            Size: 16
+            After removeDuplicatesUnsorted:  [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
+            Size: 7
 
+            Before removeDuplicatesSorted: [(head)0 -> 0 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
+            Size: 16
+            After removeDuplicatesSorted:  [(head)0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7]
+            Size: 16
+         */
 
 
     }
 
-    private static <T extends Comparable<T>> SinglyLinkedList<T> clonePrintSortPrint(SinglyLinkedList<T> list) {
+    private static <T extends Comparable<T>> SinglyLinkedList<T> clonePrintMergeSortPrint(SinglyLinkedList<T> list) {
         SinglyLinkedList<T> l = list.clone();
         System.out.println("\nOriginal:     " + list);
         System.out.println("Cloned:       " + l);

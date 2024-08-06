@@ -15,6 +15,8 @@ public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
 
     void mergeSort();
 
+    void quickSort();
+
     /*
     Merge 2 sorted Singly Linked Lists
 
