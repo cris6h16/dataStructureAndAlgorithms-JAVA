@@ -242,6 +242,17 @@ public class MAIN {
             findStartOfALoop: null
          */
 
+        list2.createLoop(list2.getSize() / 2); // 7 / 2 = position 3
+        /*
+        Before:     [ 0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5 ]
+        After:      [ 0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5
+                                ^                   |
+                                |                   |
+                                 -------------------
+         */
+        list2.findStartOfALoop(); // 4
+
+
     }
 
     private static <T extends Comparable<T>> SinglyLinkedList<T> clonePrintMergeSortPrint(SinglyLinkedList<T> list) {

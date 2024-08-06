@@ -411,34 +411,30 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         if (size < 1) return null;
         if (head == null) throw new IllegalStateException();
 
-        /* making a loop
-        int i= 0;
-        Node<T> c = head;
-        while (i++ != size /2){
-            c = c.next;
-        }
-        tail.next = c;
-         */
-
         Node<T> loopNode = new Node<>(null, null);
         Node<T> walker = head;
         Node<T> walkerX2 = head;
 
         while (walkerX2 != null && walkerX2.next != null) {
+            walker = walker.next;
             walkerX2 = walkerX2.next.next;
 
             if (walker == walkerX2) {
                 loopNode = walker;
                 break;
             }
-            walker = walker.next;
         }
         return loopNode.data;
     }
 
     @Override
     public void removeLoop() {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+    }
+
+    public void createLoop(int position) {
+        if (position == 0) return;
+        tail.next = getNode(head, position);
     }
 
     @Override
