@@ -210,6 +210,8 @@ public class MAIN {
         Size: 16
 
  */
+
+        //------------- test clone(), mergeSort() -------------\\
         var list2Clone = clonePrintMergeSortPrint(list2);
         /*
             Original:     [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
@@ -219,6 +221,10 @@ public class MAIN {
             Merge Sorted: [(head)0 -> 0 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
             Size: 16
          */
+
+
+
+        //------------- test removeDuplicates in 2 linked lists: Sorted & Unsorted -------------\\
 
         removeDuplicatesUnsortedAndPrint(list2);
         removeDuplicatesSortedAndPrint(list2Clone);
@@ -235,6 +241,9 @@ public class MAIN {
          */
 
 
+
+        //------------- test findStartOfALoop() -------------\\
+
         System.out.printf("\n\nlist: %s\nfindStartOfALoop: %s\n", list2, list2.findStartOfALoop());
         /*
             list: [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
@@ -242,6 +251,9 @@ public class MAIN {
             findStartOfALoop: null
          */
 
+        //------------- test createLoop(), removeLoop(), findStartOfALoop()(working) -------------\\
+
+        System.out.println("\n\nBefore creating a loop: " + list2);
         list2.createLoop(list2.getSize() / 2); // 7 / 2 = position 3
         /*
         Before:     [ 0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5 ]
@@ -250,8 +262,42 @@ public class MAIN {
                                 |                   |
                                  -------------------
          */
-        list2.findStartOfALoop(); // 4
+        System.out.println("Floyd's Cycle Detection Algorithm, findStartOfALoop: " + list2.findStartOfALoop());
+        list2.removeLoop();
+        System.out.printf("list after removing loop: %s\n", list2);
+        /*
+            Floyd's Cycle Detection Algorithm, findStartOfALoop: 4
+            list after removing loop: [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
+            Size: 7
+         */
 
+
+
+
+        // ------------ Merge 2 Sorted Liked Lists ------------ \\
+
+        var l1 = list2Clone.clone();
+        var l2 = list.clone();
+        l1.mergeSort();
+        l2.mergeSort();
+
+        var res = l2.clone();
+        res.mergeASortedList(l1.clone());
+
+        System.out.printf(
+                "\n\nl1(sorted): %s\nl2(sorted): %s\nMerged: %s\n",
+                l1,
+                l2,
+                res
+        );
+        /*
+            l1(sorted): [(head)0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7(tail)]
+            Size: 7
+            l2(sorted): [(head)-9999 -> -30 -> -20 -> -10 -> 1 -> 2 -> 3(tail)]
+            Size: 7
+            Merged:     [(head)-9999 -> -30 -> -20 -> -10 -> 0 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 5 -> 7(tail)]
+            Size: 14
+         */
 
     }
 

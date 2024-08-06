@@ -400,9 +400,12 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         while (c != null && c.next != null) {
             if (c.data.compareTo(c.next.data) == 0) {
                 c.next = c.next.next;
+                size--;
+                if (c.next == null) tail = c;
                 continue;
             }
             c = c.next;
+            if (c.next == null) tail = c;
         }
     }
 
@@ -429,7 +432,25 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
     @Override
     public void removeLoop() {
+        Node<T> walker = head;
+        Node<T> walkerX2 = head;
 
+        while (walkerX2 != null && walkerX2.next != null) {
+            walker = walker.next;
+            walkerX2 = walkerX2.next.next;
+            if (walker == walkerX2) {
+                removeLoop(walker);
+            }
+        }
+    }
+
+    private void removeLoop(Node<T> n) {
+        Node<T> h = this.head;
+        while (h.next != n.next) {
+            n = n.next;
+            h = h.next;
+        }
+        n.next = null;
     }
 
     public void createLoop(int position) {
@@ -497,7 +518,36 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
     @Override
     public void mergeASortedList(SinglyLinkedList<T> list2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (list2.size == 0) return;
+        if (this.size == 0) {
+            head = list2.head;
+            tail = list2.tail;
+        }
+
+        Node<T> dummyHead = new Node<>(null, null);
+        Node<T> c = dummyHead;
+
+        Node<T> n1 = this.head;
+        Node<T> n2 = list2.head;
+        while (n1 != null && n2 != null) {
+            if (n1.data.compareTo(n2.data) <= 0) {
+                c.next = n1;
+                n1 = n1.next;
+            } else {
+                c.next = n2;
+                n2 = n2.next;
+            }
+            c = c.next;
+        }
+        if (n1 != null) c.next = n1;
+        if (n2 != null) c.next = n2;
+
+        while (c.next != null) c = c.next;
+
+        this.tail = c;
+        this.head = dummyHead.next;
+        this.size = list2.getSize() + this.size;
+
     }
 
     @Override
