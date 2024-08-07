@@ -238,22 +238,18 @@ public final class SinglyLinkedListAlgorithms {
         the number 0 itself.
 
         EXAMPLE:
-            3 4 3
-        +   4 6 5
-        ------------
-            8 0 8
-
-       =
-        obj1: 3 -> 4 -> 3
-        obj2: 4 -> 6 -> 5
-        -------------------
-        res:  8 -> 0 -> 8
+        THE SUM      ||     HOW IT IS STORED
+            9 4 7        =  7 -> 4 -> 9
+        +     6 5        =  5 -> 6
+        ------------       -------------
+          1 0 1 2           2 -> 1 -> 0 -> 1
 
         Possible:     0 -> null
-        Not Possible: 0 -> 1 -> 2 -> 5 ( leading zero )
+        Not Possible:  1 -> 2 -> 5 -> 0   ( leading zero )
      */
 
 
+    // todo: Due to a misunderstanding, I've implemented the algorithm wrongly. I'll fix it later.
     public static SinglyLinkedList<Integer> addTwoLists(SinglyLinkedList<Integer> list1, SinglyLinkedList<Integer> list2) {
         // validation
         for (SinglyLinkedList<Integer> list : (SinglyLinkedList<Integer>[]) new SinglyLinkedList[]{list1, list2}) {
