@@ -23,8 +23,9 @@ Middle some Modification
  * @author <a href="https://www.github.com/cris6h16" target="_blank">Cristian Herrera</a>
  */
 public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Iterable<T>, SinglyLinkedListAlgorithms<T>, Cloneable {
-    private Node<T> head, tail;
-    private Integer size = 0; // Θ(1)
+    protected Node<T> head;
+    protected Node<T> tail;
+    protected Integer size = 0; // Θ(1)
 
     /* Time Units: 9 => Θ(1)
 
@@ -348,26 +349,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         return new IteratorHelper();
     }
 
-    @Override
-    public void reverse() {
-        reverse(null, head);
-        Node<T> tmp = head;
-        head = tail;
-        tail = tmp;
-    }
 
-    @Override
-    public T getNthFromEnd(int Nth) {
-        if (Nth > size || Nth < 1) return null;
-        int idxFromHead = size - Nth;   // position from head
-        Node<T> c = head;
-        int i = 0;
-        while (idxFromHead != i) {
-            c = c.next;
-            i++;
-        }
-        return c.data;
-    } // ASOTI
 
     // we work with pointers, thats why I not reassign the head
     @Override
@@ -555,12 +537,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    private void reverse(Node<T> previous, Node<T> current) {
-        if (current == null) return;
-        Node<T> next = current.next;
-        current.next = previous;
-        reverse(current, next);
-    }
+
 
     @Override
     protected SinglyLinkedList<T> clone() {
@@ -598,9 +575,10 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         }
     }
 
-    private class Node<T> {
-        private T data;
-        private Node<T> next;
+    // static = no need to create an instance of the class to use it
+    protected static class Node<T> {
+        protected T data;
+        protected Node<T> next;
 
         public Node(T data, Node<T> next) {
             this.data = data;

@@ -1,21 +1,66 @@
 package org.example.DataStructure.LinkedList;
 
-public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
-    void reverse();
+import static org.example.DataStructure.LinkedList.SinglyLinkedList.Node;
 
-    T getNthFromEnd(int n);
+public final class SinglyLinkedListAlgorithms {
+    public static <T extends Comparable<T>> SinglyLinkedList<T> reverse(SinglyLinkedList<T> list) {
+        var clone = list.clone();
+        Node<T> h = clone.head; // head
+        Node<T> t = clone.tail; // tail
 
-    void removeDuplicatesUnsorted();
+        _reverse(null, h);
+        Node<T> tmp = h;
+        h = t;
+        t = tmp;
+        return clone;
+    }
 
-    void removeDuplicatesSorted();
+    private static <T extends Comparable<T>> void _reverse(Node<T> previous, Node<T> c) { // current
+        if (c == null) return;
+        Node<T> next = c.next;
+        c.next = previous;
+        _reverse(c, next);
+    }
 
-    T findStartOfALoop();
+    public static <T extends Comparable<T>> T getNthFromEnd(SinglyLinkedList<T> list, int Nth) {
+        var clone = list.clone();
+        int size = clone.size;
+        Node<T> h = clone.head; // head
 
-    void removeLoop();
+        if (Nth > size || Nth < 1) return null;
+        int idxFromHead = size - Nth;   // position from head
+        Node<T> c = h;
+        int i = 0;
+        while (idxFromHead != i) {
+            c = c.next;
+            i++;
+        }
+        return c.data;
+    }
 
-    void mergeSort();
+    public static <T extends Comparable<T>> SinglyLinkedList<T> removeDuplicatesUnsorted(SinglyLinkedList<T> list) {
 
-    void quickSort();
+    }
+
+    public static <T extends Comparable<T>> SinglyLinkedList<T> removeDuplicatesSorted(SinglyLinkedList<T> list) {
+
+    }
+
+    public static <T extends Comparable<T>> T findStartOfALoop(SinglyLinkedList<T> list) {
+
+    }
+
+    public static <T extends Comparable<T>> SinglyLinkedList<T> removeLoop(SinglyLinkedList<T> list) {
+
+    }
+
+    public static <T extends Comparable<T>> SinglyLinkedList<T> mergeSort(SinglyLinkedList<T> list) {
+
+    }
+
+    public static <T extends Comparable<T>> SinglyLinkedList<T> quickSort(SinglyLinkedList<T> list) {
+
+    }
 
     /*
     Merge 2 sorted Singly Linked Lists
@@ -24,7 +69,9 @@ public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
     l2:     2 -> 4 -> 6 -> 10
     res:    1 -> 2 -> 3 -> 4 -> 6 -> 10 -> 25
      */
-    void mergeASortedList(SinglyLinkedList<T> list2);
+    public static <T extends Comparable<T>> SinglyLinkedList<T> mergeASortedList(SinglyLinkedList<T> list1, SinglyLinkedList<T> list2) {
+
+    }
     /*
         ALGORITHM: Add 2 Singly Linked Lists
 
@@ -50,6 +97,8 @@ public interface SinglyLinkedListAlgorithms<T extends Comparable<T>> {
         Not Possible: 0 -> 1 -> 2 -> 5 ( leading zero )
      */
 
-    SinglyLinkedList<T> addTwoLists(SinglyLinkedList<T> list2);
+    public static <T extends Comparable<T>> SinglyLinkedList<T> addTwoLists(SinglyLinkedList<T> list1, SinglyLinkedList<T> list2) {
+
+    }
 
 }
