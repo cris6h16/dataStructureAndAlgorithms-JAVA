@@ -1,4 +1,4 @@
-package org.example.DataStructure.LinkedList;
+package org.example.DataStructure.LinkedList.Singly;
 
 import org.example.DataStructure.LinkedList.Interfaces.List;
 

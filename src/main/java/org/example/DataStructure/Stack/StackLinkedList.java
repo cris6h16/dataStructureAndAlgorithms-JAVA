@@ -1,6 +1,6 @@
 package org.example.DataStructure.Stack;
 
-import org.example.DataStructure.LinkedList.SinglyLinkedList;
+import org.example.DataStructure.LinkedList.Singly.SinglyLinkedList;
 
 public class StackLinkedList<T extends Comparable<T>> implements Stack<T> {
     // Do operations with T which require Comparable<T> implementation

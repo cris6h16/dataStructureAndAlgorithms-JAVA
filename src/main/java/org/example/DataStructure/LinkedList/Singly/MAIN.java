@@ -1,7 +1,7 @@
-package org.example.DataStructure.LinkedList;
+package org.example.DataStructure.LinkedList.Singly;
 
-import static org.example.DataStructure.LinkedList.MAIN.POSITION.FIRST;
-import static org.example.DataStructure.LinkedList.MAIN.POSITION.LAST;
+import static org.example.DataStructure.LinkedList.Singly.MAIN.POSITION.FIRST;
+import static org.example.DataStructure.LinkedList.Singly.MAIN.POSITION.LAST;
 
 public class MAIN {
     public static void main(String[] args) {

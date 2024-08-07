@@ -1,6 +1,6 @@
 package org.example.DataStructure.Queue;
 
-import org.example.DataStructure.LinkedList.SinglyLinkedList;
+import org.example.DataStructure.LinkedList.Singly.SinglyLinkedList;
 
 public class QueueLinkedList<T extends Comparable<T>> implements Queue<T> {
     SinglyLinkedList<T> linked;
