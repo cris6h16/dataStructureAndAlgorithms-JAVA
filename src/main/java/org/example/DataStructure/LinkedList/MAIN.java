@@ -1,331 +1,335 @@
 package org.example.DataStructure.LinkedList;
 
-import java.util.function.Supplier;
+import static org.example.DataStructure.LinkedList.MAIN.POSITION.FIRST;
+import static org.example.DataStructure.LinkedList.MAIN.POSITION.LAST;
 
 public class MAIN {
     public static void main(String[] args) {
-
-        //------------- test remove first, last, and by value, peekFirst, peekLast, contains -------------\\
-        SinglyLinkedList<Integer> nums = new SinglyLinkedList<>(1);
-        removeAndPrint(nums, true); //first
-        removeAndPrint(nums, false); //last
-        removeAndPrint(nums, true); //first
-        removeAndPrint(nums, 45);
-        System.out.println("\npeekFirst: " + nums.peekFirst());
-        System.out.println("peekLast: " + nums.peekLast());
-        System.out.println("contains 45: " + nums.contains(45));
+        final SinglyLinkedList<Integer> bossList = new SinglyLinkedList<>();
+        System.out.println("Created: " + bossList);
+        // ADD
+        addAndPrint(bossList, 1, FIRST);
+        addAndPrint(bossList, 2, LAST);
+        addAndPrint(bossList, 1, FIRST);
+        addAndPrint(bossList, 1, FIRST);
+        addAndPrint(bossList, 4, FIRST);
+        addAndPrint(bossList, 3, LAST);
+        addAndPrint(bossList, 3, LAST);
+        addAndPrint(bossList, 45, LAST);
+        addAndPrint(bossList, 5, FIRST);
+        addAndPrint(bossList, 2, LAST);
+        addAndPrint(bossList, 4, FIRST);
+        addAndPrint(bossList, 4, FIRST);
+        addAndPrint(bossList, 45, LAST);
+        addAndPrint(bossList, 7, LAST);
+        addAndPrint(bossList, 7, FIRST);
+        addAndPrint(bossList, 0, LAST);
+        addAndPrint(bossList, 0, FIRST);
         /*
-            Removed 1 from first
-            toString: []
+            Created: []
             Size: 0
 
-            Removed null from last
-            toString: []
-            Size: 0
-
-            Removed null from first
-            toString: []
-            Size: 0
-
-            Removed null (tried: 45)
-            toString: []
-            Size: 0
-
-            peekFirst: null
-            peekLast: null
-            contains 45: false
-         */
-        //--------
-
-        addAndPrint(nums, 1, true); //first
-        addAndPrint(nums, 7, false); //last
-        addAndPrint(nums, -72, true); //first
-        /*
             Added 1 to first
-            toString: [1]
+            toString: [(head)1(tail)]
             Size: 1
 
-            Added 7 to last
-            toString: [1 -> 7]
+            Added 2 to last
+            toString: [(head)1 -> 2(tail)]
             Size: 2
 
+            Added 1 to first
+            toString: [(head)1 -> 1 -> 2(tail)]
+            Size: 3
+
+            Added 1 to first
+            toString: [(head)1 -> 1 -> 1 -> 2(tail)]
+            Size: 4
+
+            Added 4 to first
+            toString: [(head)4 -> 1 -> 1 -> 1 -> 2(tail)]
+            Size: 5
+
+            Added 3 to last
+            toString: [(head)4 -> 1 -> 1 -> 1 -> 2 -> 3(tail)]
+            Size: 6
+
+            Added 3 to last
+            toString: [(head)4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3(tail)]
+            Size: 7
+
+            Added 45 to last
+            toString: [(head)4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45(tail)]
+            Size: 8
+
+            Added 5 to first
+            toString: [(head)5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45(tail)]
+            Size: 9
+
+            Added 2 to last
+            toString: [(head)5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2(tail)]
+            Size: 10
+
+            Added 4 to first
+            toString: [(head)4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2(tail)]
+            Size: 11
+
+            Added 4 to first
+            toString: [(head)4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2(tail)]
+            Size: 12
+
+            Added 45 to last
+            toString: [(head)4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45(tail)]
+            Size: 13
+
+            Added 7 to last
+            toString: [(head)4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45 -> 7(tail)]
+            Size: 14
+
+            Added 7 to first
+            toString: [(head)7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45 -> 7(tail)]
+            Size: 15
+
+            Added 0 to last
+            toString: [(head)7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45 -> 7 -> 0(tail)]
+            Size: 16
+
+            Added 0 to first
+            toString: [(head)0 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45 -> 7 -> 0(tail)]
+            Size: 17
+         */
+
+        // REMOVE
+        removeAndPrint(bossList, LAST);
+        removeAndPrint(bossList, FIRST);
+        removeAndPrint(bossList, LAST);
+        removeAndPrint(bossList, 45);
+        /*
+            Removed 0 from last
+            toString: [(head)0 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45 -> 7(tail)]
+            Size: 16
+
+            Removed 0 from first
+            toString: [(head)7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45 -> 7(tail)]
+            Size: 15
+
+            Removed 7 from last
+            toString: [(head)7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 45 -> 2 -> 45(tail)]
+            Size: 14
+
+            Removed 45 (tried: 45)
+            toString: [(head)7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2(tail)]
+            Size: 12
+         */
+
+        // ADD
+        addAndPrint(bossList, 1, FIRST);
+        addAndPrint(bossList, 7, LAST);
+        addAndPrint(bossList, -72, FIRST);
+        /*
+            Added 1 to first
+            toString: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2(tail)]
+            Size: 13
+
+            Added 7 to last
+            toString: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+
             Added -72 to first
-            toString: [-72 -> 1 -> 7]
-            Size: 3
+            toString: [(head)-72 -> 1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 15
          */
 
-        removeAndPrint(nums, 27);
+        // REMOVE
+        removeAndPrint(bossList, FIRST);
         /*
-            Removed null (tried: 27)
-            toString: [-72 -> 1 -> 7]
-            Size: 3
-         */
-
-
-        //------------- test Iterable<T> & Iterator<T> -------------\\
-        for (Integer i : nums) System.out.println(i);
-        nums.forEach(System.out::println);
-        nums.spliterator().forEachRemaining(System.out::println);
-        /*
-            -72
-            1
-            7
-            -72
-            1
-            7
-            -72
-            1
-            7
-         */
-
-
-        //------------- reverse a linked list -------------\\
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<>(-9999);
-        list.addLast(1);
-        list.addLast(2);
-        list.addLast(3);
-        list.addFirst(-10);
-        list.addFirst(-20);
-        list.addFirst(-30);
-        System.out.println("\n" + list);
-        list.reverse();
-        System.out.println(list);
-        /*
-            [-30 -> -20 -> -10 -> -9999 -> 1 -> 2 -> 3]
-            Size: 7
-            [3 -> 2 -> 1 -> -9999 -> -10 -> -20 -> -30]
-            Size: 7
-         */
-
-        //------------- getNthFromEnd -------------\\
-        Supplier<String> resultsSupplier = () -> {
-            StringBuilder sb = new StringBuilder();
-            for (int i = -1; i < 10; i++) {
-                sb.append(list.getNthFromEnd(i)).append(", ");
-            }
-            return sb.toString();
-        };
-
-        String results = resultsSupplier.get();
-
-        System.out.printf(
-                "\nCurrent list: %s\nCall: %s\nResult: %s\n",
-                list,
-                "\ngetNthFromEnd(-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9):",
-                results
-        );
-        /*
-            Current list: [3 -> 2 -> 1 -> -9999 -> -10 -> -20 -> -30]
-            Size: 7
-            Call:
-            getNthFromEnd(-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9):
-            Result: null, null, -30, -20, -10, -9999, 1, 2, 3, null, null,
-         */
-
-
-        System.out.println(
-                "\n\n//------------- test removeDuplicates -------------\\\\\n\n"
-        );
-        SinglyLinkedList<Integer> list2 = new SinglyLinkedList<>(1);
-        System.out.println("Created: " + list2);
-        addAndPrint(list2, 1, false);
-        addAndPrint(list2, 2, true);
-        addAndPrint(list2, 1, false);
-        addAndPrint(list2, 1, false);
-        addAndPrint(list2, 4, false);
-        addAndPrint(list2, 3, true);
-        addAndPrint(list2, 3, true);
-        addAndPrint(list2, 5, false);
-        addAndPrint(list2, 2, true);
-        addAndPrint(list2, 4, false);
-        addAndPrint(list2, 4, false);
-        addAndPrint(list2, 7, true);
-        addAndPrint(list2, 7, false);
-        addAndPrint(list2, 0, true);
-        addAndPrint(list2, 0, false);
-/*
-        //------------- test removeDuplicates -------------\\
-
-        Created: [(head)1(tail)]
-        Size: 1
-
-        Added 1 to last
-        toString: [(head)1 -> 1(tail)]
-        Size: 2
-
-        Added 2 to first
-        toString: [(head)2 -> 1 -> 1(tail)]
-        Size: 3
-
-        Added 1 to last
-        toString: [(head)2 -> 1 -> 1 -> 1(tail)]
-        Size: 4
-
-        Added 1 to last
-        toString: [(head)2 -> 1 -> 1 -> 1 -> 1(tail)]
-        Size: 5
-
-        Added 4 to last
-        toString: [(head)2 -> 1 -> 1 -> 1 -> 1 -> 4(tail)]
-        Size: 6
-
-        Added 3 to first
-        toString: [(head)3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4(tail)]
-        Size: 7
-
-        Added 3 to first
-        toString: [(head)3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4(tail)]
-        Size: 8
-
-        Added 5 to last
-        toString: [(head)3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5(tail)]
-        Size: 9
-
-        Added 2 to first
-        toString: [(head)2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5(tail)]
-        Size: 10
-
-        Added 4 to last
-        toString: [(head)2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4(tail)]
-        Size: 11
-
-        Added 4 to last
-        toString: [(head)2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4(tail)]
-        Size: 12
-
-        Added 7 to first
-        toString: [(head)7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4(tail)]
-        Size: 13
-
-        Added 7 to last
-        toString: [(head)7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7(tail)]
-        Size: 14
-
-        Added 0 to first
-        toString: [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7(tail)]
-        Size: 15
-
-        Added 0 to last
-        toString: [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
-        Size: 16
-
- */
-
-        //------------- test clone(), mergeSort() -------------\\
-        var list2Clone = clonePrintMergeSortPrint(list2);
-        /*
-            Original:     [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
-            Size: 16
-            Cloned:       [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
-            Size: 16
-            Merge Sorted: [(head)0 -> 0 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
-            Size: 16
-         */
-
-
-
-        //------------- test removeDuplicates in 2 linked lists: Sorted & Unsorted -------------\\
-
-        removeDuplicatesUnsortedAndPrint(list2);
-        removeDuplicatesSortedAndPrint(list2Clone);
-        /*
-            Before removeDuplicatesUnsorted: [(head)0 -> 7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 0(tail)]
-            Size: 16
-            After removeDuplicatesUnsorted:  [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
-            Size: 7
-
-            Before removeDuplicatesSorted: [(head)0 -> 0 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
-            Size: 16
-            After removeDuplicatesSorted:  [(head)0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7]
-            Size: 16
-         */
-
-
-
-        //------------- test findStartOfALoop() -------------\\
-
-        System.out.printf("\n\nlist: %s\nfindStartOfALoop: %s\n", list2, list2.findStartOfALoop());
-        /*
-            list: [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
-            Size: 7
-            findStartOfALoop: null
-         */
-
-        //------------- test createLoop(), removeLoop(), findStartOfALoop()(working) -------------\\
-
-        System.out.println("\n\nBefore creating a loop: " + list2);
-        list2.createLoop(list2.getSize() / 2); // 7 / 2 = position 3
-        /*
-        Before:     [ 0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5 ]
-        After:      [ 0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5
-                                ^                   |
-                                |                   |
-                                 -------------------
-         */
-        System.out.println("Floyd's Cycle Detection Algorithm, findStartOfALoop: " + list2.findStartOfALoop());
-        list2.removeLoop();
-        System.out.printf("list after removing loop: %s\n", list2);
-        /*
-            Floyd's Cycle Detection Algorithm, findStartOfALoop: 4
-            list after removing loop: [(head)0 -> 7 -> 2 -> 3 -> 1 -> 4 -> 5(tail)]
-            Size: 7
-         */
-
-
-
-
-        // ------------ Merge 2 Sorted Liked Lists ------------ \\
-
-        var l1 = list2Clone.clone();
-        var l2 = list.clone();
-        l1.mergeSort();
-        l2.mergeSort();
-
-        var res = l2.clone();
-        res.mergeASortedList(l1.clone());
-
-        System.out.printf(
-                "\n\nl1(sorted): %s\nl2(sorted): %s\nMerged: %s\n",
-                l1,
-                l2,
-                res
-        );
-        /*
-            l1(sorted): [(head)0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7(tail)]
-            Size: 7
-            l2(sorted): [(head)-9999 -> -30 -> -20 -> -10 -> 1 -> 2 -> 3(tail)]
-            Size: 7
-            Merged:     [(head)-9999 -> -30 -> -20 -> -10 -> 0 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 5 -> 7(tail)]
+            Removed -72 from first
+            toString: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
             Size: 14
          */
 
+        // PEEK & CONTAINS
+        System.out.println("\npeekFirst: " + bossList.peekFirst());
+        System.out.println("peekLast:    " + bossList.peekLast());
+        System.out.println("contains 45: " + bossList.contains(45));
+        /*
+            peekFirst: 1
+            peekLast:  7
+            contains 45: false
+         */
+
+
+        // Iterable<T> & Iterator<T>
+        for (Integer i : bossList) System.out.print(" " + i + " |");
+        System.out.println();
+        bossList.forEach(e -> System.out.print(" " + e + " |"));
+        System.out.println();
+        bossList.spliterator().forEachRemaining(e -> System.out.print(" " + e + " |"));
+        /*
+             1 | 7 | 4 | 4 | 5 | 4 | 1 | 1 | 1 | 2 | 3 | 3 | 2 | 7 |
+             1 | 7 | 4 | 4 | 5 | 4 | 1 | 1 | 1 | 2 | 3 | 3 | 2 | 7 |
+             1 | 7 | 4 | 4 | 5 | 4 | 1 | 1 | 1 | 2 | 3 | 3 | 2 | 7 |
+         */
+
+        // before use in algorithms
+        System.out.println("\n\nOriginal: " + bossList);
+        /*
+            Original: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+         */
+
+        // REVERSE algorithm
+        var copy = bossList.clone();
+        SinglyLinkedListAlgorithms.reverse(copy);
+        System.out.println("\n");
+        System.out.println("Before reverse: " + bossList);
+        System.out.println("After reverse:  " + copy);
+        /*
+            Before reverse: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+            After reverse:  [(head)7 -> 2 -> 3 -> 3 -> 2 -> 1 -> 1 -> 1 -> 4 -> 5 -> 4 -> 4 -> 7 -> 1(tail)]
+            Size: 14
+         */
+
+        // GET Nth FROM END algorithm
+        System.out.println("\n");
+        System.out.println("getNthFromEnd(3):    " + SinglyLinkedListAlgorithms.getNthFromEnd(bossList, 3));
+        System.out.println("getNthFromEnd(1):    " + SinglyLinkedListAlgorithms.getNthFromEnd(bossList, 1));
+        System.out.println("getNthFromEnd(0):    " + SinglyLinkedListAlgorithms.getNthFromEnd(bossList, 0));
+        System.out.println("getNthFromEnd(100):  " + SinglyLinkedListAlgorithms.getNthFromEnd(bossList, 100));
+        System.out.println("getNthFromEnd(-100): " + SinglyLinkedListAlgorithms.getNthFromEnd(bossList, -100));
+        /*
+            getNthFromEnd(3):    3
+            getNthFromEnd(1):    7
+            getNthFromEnd(0):    null
+            getNthFromEnd(100):  null
+            getNthFromEnd(-100): null
+        */
+
+        // REMOVE DUPLICATES algorithms
+        var copy1 = bossList.clone();
+        SinglyLinkedListAlgorithms.removeDuplicatesUnsorted(copy1);
+        System.out.println("\n");
+        System.out.println("Before removeDuplicatesUnsorted: " + bossList);
+        System.out.println("After removeDuplicatesUnsorted:  " + copy1);
+        /*
+            Before removeDuplicatesUnsorted: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+            After removeDuplicatesUnsorted:  [(head)1 -> 7 -> 4 -> 5 -> 2 -> 3(tail)]
+            Size: 6
+         */
+
+        // CLONE
+        System.out.println("\n");
+        System.out.println("Original: " + bossList);
+        System.out.println("Cloned:   " + bossList.clone());
+        /*
+            Original: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+            Cloned:   [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+         */
+
+
+        // REMOVE DUPLICATES algorithms (sorted)
+        var sorted = bossList.clone();
+        SinglyLinkedListAlgorithms.mergeSort(sorted);
+        var sortedNoDuplicates = sorted.clone();
+        SinglyLinkedListAlgorithms.removeDuplicatesSorted(sortedNoDuplicates);
+        System.out.println("\n");
+        System.out.println("Original List: " + bossList);
+        System.out.println("Sorted:        " + sorted);
+        System.out.println("After removeDuplicatesSorted:  " + sortedNoDuplicates);
+        /*
+            Original List: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+            Sorted:        [(head)1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
+            Size: 14
+            After removeDuplicatesSorted:  [(head)1 -> 2 -> 3 -> 4 -> 5 -> 7(tail)]
+            Size: 6
+         */
+
+        // REMOVE DUPLICATES algorithms (unsorted)
+        var copy3 = bossList.clone();
+        SinglyLinkedListAlgorithms.removeDuplicatesUnsorted(copy3);
+        System.out.println("\n");
+        System.out.println("Before removeDuplicatesUnsorted: " + bossList);
+        System.out.println("After removeDuplicatesUnsorted:  " + copy3);
+        /*
+            Before removeDuplicatesUnsorted: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+            After removeDuplicatesUnsorted:  [(head)1 -> 7 -> 4 -> 5 -> 2 -> 3(tail)]
+            Size: 6
+         */
+
+
+        // CREATE LOOP
+        var loopList = bossList.clone();
+        SinglyLinkedListAlgorithms.createLoop(loopList, 3);
+        System.out.println("\n");
+        System.out.println("Before creating a loop: " + bossList);
+        System.out.println("After creating a loop:  " + "<to do>");
+        /*
+            Before creating a loop: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+            After creating a loop:  [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+                                                     ^                                                      |
+                                                     + ---------------------------------------------------- +
+         */
+
+        // FIND START OF A LOOP ( Floyd's Cycle Detection Algorithm )
+        System.out.println("\n");
+        System.out.println("List with a loop:  " + "<to do>");
+        System.out.println("List with a loop  (where the pointers met): " + SinglyLinkedListAlgorithms.findStartOfALoop(loopList));
+        System.out.println("List with no loop (where the pointers met): " + SinglyLinkedListAlgorithms.findStartOfALoop(bossList));
+        /*
+            List with a loop:  [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+                                                ^                                                      |
+                                                + ---------------------------------------------------- +
+            List with a loop  (where the pointers met): 2
+            List with no loop (where the pointers met): null
+         */
+
+
+
+        // REMOVE LOOP algorithm
+        SinglyLinkedListAlgorithms.removeLoop(loopList); // I not use the tail node to remove the loop
+        System.out.println("\n");
+        System.out.println("Before removing loop: " + "<to do>");
+        System.out.println("After removing loop:  " + loopList);
+        /*
+            Before removing loop: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+                                                   ^                                                      |
+                                                   + ---------------------------------------------------- +
+            After removing loop:  [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 1 -> 1 -> 1 -> 2 -> 3 -> 3 -> 2 -> 7(tail)]
+            Size: 14
+         */
+
+
+        // MERGE TWO SORTED LINKED LISTS && MERGE SORT algorithm
+        var copy5 = bossList.clone();
+        var copy6 = bossList.clone();
+        SinglyLinkedListAlgorithms.mergeSort(copy5);
+        SinglyLinkedListAlgorithms.mergeSort(copy6);
+        SinglyLinkedList<Integer> mergedList = SinglyLinkedListAlgorithms.mergeTwoSortedLists(copy5, copy6);
+
+        System.out.println("\n");
+        System.out.println("List 1: " + copy5);
+        System.out.println("List 2: " + copy6);
+        System.out.println("Merged: " + mergedList);
+        /*
+            List 1: [(head)1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
+            Size: 14
+            List 2: [(head)1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 3 -> 3 -> 4 -> 4 -> 4 -> 5 -> 7 -> 7(tail)]
+            Size: 14
+            Merged: [(head)1 -> 1 -> 1 -> 1 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 2 -> 2 -> 3 -> 3 -> 3 -> 3 -> 4 -> 4 -> 4 -> 4 -> 4 -> 4 -> 5 -> 5 -> 7 -> 7 -> 7 -> 7(tail)]
+            Size: 28
+         */
     }
 
-    private static <T extends Comparable<T>> SinglyLinkedList<T> clonePrintMergeSortPrint(SinglyLinkedList<T> list) {
-        SinglyLinkedList<T> l = list.clone();
-        System.out.println("\nOriginal:     " + list);
-        System.out.println("Cloned:       " + l);
-        l.mergeSort();
-        System.out.println("Merge Sorted: " + l);
-        return l;
-    }
-
-    private static <T extends Comparable<T>> void removeDuplicatesSortedAndPrint(SinglyLinkedList<T> list) {
-        System.out.println("\nBefore removeDuplicatesSorted: " + list);
-        list.removeDuplicatesSorted();
-        System.out.println("After removeDuplicatesSorted:  " + list);
-    }
-
-    private static void removeDuplicatesUnsortedAndPrint(SinglyLinkedList<Integer> list) {
-        System.out.println("\nBefore removeDuplicatesUnsorted: " + list);
-        list.removeDuplicatesUnsorted();
-        System.out.println("After removeDuplicatesUnsorted:  " + list);
-    }
-
-    private static <T extends Comparable<T>> void removeAndPrint(SinglyLinkedList<T> list, boolean first) {
+    private static <T extends Comparable<T>> void removeAndPrint(SinglyLinkedList<T> list, POSITION where) {
         String msg = "\nRemoved %s from %s\ntoString: %s\n";
-        T removed = first ? list.removeFirst() : list.removeLast();
-        System.out.printf(msg, removed, first ? "first" : "last", list);
+        T removed = where.equals(FIRST) ? list.removeFirst() : list.removeLast();
+        System.out.printf(msg, removed, where.equals(FIRST) ? "first" : "last", list);
     }
 
     private static <T extends Comparable<T>> void removeAndPrint(SinglyLinkedList<T> list, T val) {
@@ -334,10 +338,14 @@ public class MAIN {
         System.out.printf(msg, removed, val, list);
     }
 
-    private static <T extends Comparable<T>> void addAndPrint(SinglyLinkedList<T> list, T val, boolean first) {
+    private static <T extends Comparable<T>> void addAndPrint(SinglyLinkedList<T> list, T val, POSITION where) {
         String msg = "\nAdded %s to %s\ntoString: %s\n";
-        if (first) list.addFirst(val);
+        if (where.equals(FIRST)) list.addFirst(val);
         else list.addLast(val);
-        System.out.printf(msg, val, first ? "first" : "last", list.toString());
+        System.out.printf(msg, val, where.equals(FIRST) ? "first" : "last", list);
+    }
+
+    enum POSITION {
+        FIRST, LAST
     }
 }
