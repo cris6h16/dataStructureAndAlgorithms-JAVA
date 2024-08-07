@@ -290,7 +290,6 @@ public class MAIN {
          */
 
 
-
         // REMOVE LOOP algorithm
         SinglyLinkedListAlgorithms.removeLoop(loopList); // I not use the tail node to remove the loop
         System.out.println("\n");
@@ -324,6 +323,37 @@ public class MAIN {
             Merged: [(head)1 -> 1 -> 1 -> 1 -> 1 -> 1 -> 1 -> 1 -> 2 -> 2 -> 2 -> 2 -> 3 -> 3 -> 3 -> 3 -> 4 -> 4 -> 4 -> 4 -> 4 -> 4 -> 5 -> 5 -> 7 -> 7 -> 7 -> 7(tail)]
             Size: 28
          */
+
+
+        // ADD TWO LINKED LISTS algorithm
+        var l1 = new SinglyLinkedList<Integer>();l1.addLast(1);l1.addLast(7);l1.addLast(4);l1.addLast(4);l1.addLast(5);l1.addLast(4);l1.addLast(9);l1.addLast(1);l1.addLast(1);l1.addLast(0);l1.addLast(9);l1.addLast(9);l1.addLast(9);l1.addLast(9);
+        var l2 = new SinglyLinkedList<Integer>();l2.addLast(9);l2.addLast(1);l2.addLast(9);l2.addLast(9);l2.addLast(9);l2.addLast(9);l2.addLast(0);
+        System.out.println("\n");
+        System.out.println("List 1: " + l1);
+        System.out.println("List 2: " + l2);
+        System.out.println("Sum Expected:");
+        System.out.println("                  (1)(1)   (1)(1)(1)(1)   ");
+        System.out.println("    1  7  4  4  5  4  9  1  1  0  9  9  9  9 ");
+        System.out.println("+                        9  1  9  9  9  9  0 ");
+        System.out.println("-------------------------------------------------");
+        System.out.println("    1  7  4  4  5  5  0  0  3  0  9  9  8  9 ");
+        System.out.println("\nReal Result: " + SinglyLinkedListAlgorithms.addTwoLists(l1, l2));
+        /*
+            List 1: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 9 -> 1 -> 1 -> 0 -> 9 -> 9 -> 9 -> 9(tail)]
+            Size: 14
+            List 2: [(head)9 -> 1 -> 9 -> 9 -> 9 -> 9 -> 0(tail)]
+            Size: 7
+            Sum Expected:
+                                                  (1)(1)   (1)(1)(1)(1)
+                                    1  7  4  4  5  4  9  1  1  0  9  9  9  9
+                                +                        9  1  9  9  9  9  0
+                                -------------------------------------------------
+                                    1  7  4  4  5  5  0  0  3  0  9  9  8  9
+
+            Real Result: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 5 -> 0 -> 0 -> 3 -> 0 -> 9 -> 9 -> 8 -> 9(tail)]
+            Size: 14
+
+         */
     }
 
     private static <T extends Comparable<T>> void removeAndPrint(SinglyLinkedList<T> list, POSITION where) {
@@ -342,7 +372,7 @@ public class MAIN {
         String msg = "\nAdded %s to %s\ntoString: %s\n";
         if (where.equals(FIRST)) list.addFirst(val);
         else list.addLast(val);
-        System.out.printf(msg, val, where.equals(FIRST) ? "first" : "last", list);
+        System.out.printf(msg, val.toString(), where.equals(FIRST) ? "first" : "last", list.toString());
     }
 
     enum POSITION {

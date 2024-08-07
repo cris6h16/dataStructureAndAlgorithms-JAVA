@@ -253,10 +253,69 @@ public final class SinglyLinkedListAlgorithms {
         Not Possible: 0 -> 1 -> 2 -> 5 ( leading zero )
      */
 
-    public static <T extends Comparable<T>> SinglyLinkedList<T> addTwoLists(SinglyLinkedList<T> list1, SinglyLinkedList<T> list2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+    public static SinglyLinkedList<Integer> addTwoLists(SinglyLinkedList<Integer> list1, SinglyLinkedList<Integer> list2) {
+        // validation
+        for (SinglyLinkedList<Integer> list : (SinglyLinkedList<Integer>[]) new SinglyLinkedList[]{list1, list2}) {
+            if (_isSizeLessThan(1, list)) throw new IllegalArgumentException();
+            if (_isLeadingZero(list) && _isSizeLessThan(2, list)) throw new IllegalArgumentException();
+            if (_containsNegativeIntegers(list)) throw new IllegalArgumentException();
+            if (_anyNodeIsGreaterThan9(list))
+                throw new IllegalArgumentException(); // means: a not has more than 1 digit
+        }
+
+        // result list
+        int tobeAdded;
+        int exceedDigit = 0;
+        SinglyLinkedList<Integer> res = new SinglyLinkedList<>();
+
+        //
+        while (list1.peekLast() != null || list2.peekFirst() != null) {
+            Integer num1 = list1.removeLast();
+            Integer num2 = list2.removeLast();
+
+            tobeAdded = (num1 == null ? 0 : num1) + (num2 == null ? 0 : num2) + exceedDigit;
+            exceedDigit = 0;
+
+            if (tobeAdded > 9) { // the max/min sum that exceeds the 1 digit of size can be either 9 + 9 + 1 = 19 or 9 + 1 + 0 = 10
+                // 10 >= tobeAdded <= 19
+                exceedDigit = 1;
+                tobeAdded = tobeAdded - 10;
+                res.addFirst(tobeAdded);
+                continue;
+            }
+
+            res.addFirst(tobeAdded);
+        }
+
+        return res;
     }
 
+    private static boolean _isSizeLessThan(int size, SinglyLinkedList<Integer> list) {
+        return list.size < size;
+    }
+
+    private static boolean _isLeadingZero(SinglyLinkedList<Integer> list) {
+        return list.head.data == 0;
+    }
+
+    private static boolean _containsNegativeIntegers(SinglyLinkedList<Integer> list) {
+        Node<Integer> c = list.head;
+        while (c != null) {
+            if (c.data < 0) return true;
+            c = c.next;
+        }
+        return false;
+    }
+
+    private static boolean _anyNodeIsGreaterThan9(SinglyLinkedList<Integer> list) {
+        Node<Integer> c = list.head;
+        while (c != null) {
+            if (c.data > 9) return true;
+            c = c.next;
+        }
+        return false;
+    }
 
     public static <T extends Comparable<T>> void createLoop(SinglyLinkedList<T> list, int position) {
         if (position == 0) return;
