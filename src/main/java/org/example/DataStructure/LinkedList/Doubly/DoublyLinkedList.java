@@ -1,9 +1,10 @@
 package org.example.DataStructure.LinkedList.Doubly;
 
 import org.example.DataStructure.LinkedList.Interfaces.List;
-import org.w3c.dom.Node;
 
-public class DoublyLinkedList<T extends Comparable<T>> implements List<T> {
+import java.util.Iterator;
+
+public class DoublyLinkedList<T extends Comparable<T>> implements List<T>, Iterable<T>, Cloneable {
     private DoublyNode<T> head;
     private DoublyNode<T> tail;
     private int size;
@@ -137,11 +138,49 @@ public class DoublyLinkedList<T extends Comparable<T>> implements List<T> {
             c = c.next;
         }
         sb.append(" ]");
+        sb.append(" <<size: ").append(size).append(">>");
         return sb.toString();
     }
 
+    @Override
+    protected DoublyLinkedList<T> clone() {
+        DoublyLinkedList<T> clone = new DoublyLinkedList<>();
+        DoublyNode<T> c = head;
+        while (c != null) {
+            clone.addLast(c.data);
+            c = c.next;
+        }
+        return clone;
+    }
 
-    protected class DoublyNode<TN> {
+    @Override
+    public Iterator<T> iterator() {
+        return new IteratorHelper(head);
+    }
+
+    protected class IteratorHelper implements Iterator<T> {
+
+        DoublyNode<T> head;
+
+        public IteratorHelper(DoublyNode<T> head) {
+            this.head = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.head != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) return null;
+            T val = this.head.data;
+            this.head = head.next;
+            return val;
+        }
+    }
+
+    protected static class DoublyNode<TN> {
         private DoublyNode<TN> previous;
         private TN data;
         private DoublyNode<TN> next;

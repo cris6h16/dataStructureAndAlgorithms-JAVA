@@ -1,7 +1,8 @@
 package org.example.DataStructure.LinkedList.Doubly;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        DoublyLinkedList<Integer> clone;
         DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
         list.addFirst(1);
         list.addFirst(2);
@@ -14,6 +15,7 @@ public class Main {
         list.addLast(8);
         list.addLast(0);
         list.addLast(-1);
+        clone = list.clone(); // data is copied, not the reference
 
         System.out.println(list);
         /*
@@ -49,6 +51,11 @@ public class Main {
         System.out.println(list);
         /*
             [  ]
+         */
+
+        clone.forEach(e -> System.out.print(e + " | ")); // iterable -> iterator
+        /*
+            5 | 4 | 3 | 2 | 1 | 6 | 7 | 8 | 0 | -1 |
          */
     }
 }
