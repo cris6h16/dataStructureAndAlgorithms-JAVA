@@ -328,29 +328,36 @@ public class MAIN {
         // ADD TWO LINKED LISTS algorithm
         var l1 = new SinglyLinkedList<Integer>();l1.addLast(1);l1.addLast(7);l1.addLast(4);l1.addLast(4);l1.addLast(5);l1.addLast(4);l1.addLast(9);l1.addLast(1);l1.addLast(1);l1.addLast(0);l1.addLast(9);l1.addLast(9);l1.addLast(9);l1.addLast(9);
         var l2 = new SinglyLinkedList<Integer>();l2.addLast(9);l2.addLast(1);l2.addLast(9);l2.addLast(9);l2.addLast(9);l2.addLast(9);l2.addLast(0);
+        SinglyLinkedListAlgorithms.reverse(l1);
+        SinglyLinkedListAlgorithms.reverse(l2);
+        SinglyLinkedList<Integer> res = SinglyLinkedListAlgorithms.addTwoLists(l1, l2); // l1 & l2 are reversed
         System.out.println("\n");
-        System.out.println("List 1: " + l1);
-        System.out.println("List 2: " + l2);
+        System.out.println("List 1(reversed): " + l1);
+        System.out.println("List 2(reversed): " + l2);
+        System.out.println("Result(reversed): " + res);
         System.out.println("Sum Expected:");
         System.out.println("                  (1)(1)   (1)(1)(1)(1)   ");
         System.out.println("    1  7  4  4  5  4  9  1  1  0  9  9  9  9 ");
         System.out.println("+                        9  1  9  9  9  9  0 ");
         System.out.println("-------------------------------------------------");
+        SinglyLinkedListAlgorithms.reverse(res); // Reverse the result back to original order
         System.out.println("    1  7  4  4  5  5  0  0  3  0  9  9  8  9 ");
-        System.out.println("\nReal Result: " + SinglyLinkedListAlgorithms.addTwoLists(l1, l2));
+        System.out.println("\nReal Result(reversed again): " + res);
         /*
-            List 1: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 4 -> 9 -> 1 -> 1 -> 0 -> 9 -> 9 -> 9 -> 9(tail)]
+            List 1(reversed): [(head)9 -> 9 -> 9 -> 9 -> 0 -> 1 -> 1 -> 9 -> 4 -> 5 -> 4 -> 4 -> 7 -> 1(tail)]
             Size: 14
-            List 2: [(head)9 -> 1 -> 9 -> 9 -> 9 -> 9 -> 0(tail)]
+            List 2(reversed): [(head)0 -> 9 -> 9 -> 9 -> 9 -> 1 -> 9(tail)]
             Size: 7
+            Result(reversed): [(head)9 -> 8 -> 9 -> 9 -> 0 -> 3 -> 0 -> 0 -> 5 -> 5 -> 4 -> 4 -> 7 -> 1(tail)]
+            Size: 14
             Sum Expected:
-                                                  (1)(1)   (1)(1)(1)(1)
-                                    1  7  4  4  5  4  9  1  1  0  9  9  9  9
-                                +                        9  1  9  9  9  9  0
-                                -------------------------------------------------
-                                    1  7  4  4  5  5  0  0  3  0  9  9  8  9
+                                                              (1)(1)   (1)(1)(1)(1)
+                                                1  7  4  4  5  4  9  1  1  0  9  9  9  9
+                                            +                        9  1  9  9  9  9  0
+                                            -------------------------------------------------
+                                                1  7  4  4  5  5  0  0  3  0  9  9  8  9
 
-            Real Result: [(head)1 -> 7 -> 4 -> 4 -> 5 -> 5 -> 0 -> 0 -> 3 -> 0 -> 9 -> 9 -> 8 -> 9(tail)]
+            Real Result(reversed again): [(head)1 -> 7 -> 4 -> 4 -> 5 -> 5 -> 0 -> 0 -> 3 -> 0 -> 9 -> 9 -> 8 -> 9(tail)]
             Size: 14
 
          */

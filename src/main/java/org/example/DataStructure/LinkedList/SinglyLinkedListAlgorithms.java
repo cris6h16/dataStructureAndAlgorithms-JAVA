@@ -246,10 +246,10 @@ public final class SinglyLinkedListAlgorithms {
 
         Possible:     0 -> null
         Not Possible:  1 -> 2 -> 5 -> 0   ( leading zero )
+
+        PD: Solve using the nodes ( avoid peekLast(), removeLast(), etc )
      */
 
-
-    // todo: Due to a misunderstanding, I've implemented the algorithm wrongly. I'll fix it later.
     public static SinglyLinkedList<Integer> addTwoLists(SinglyLinkedList<Integer> list1, SinglyLinkedList<Integer> list2) {
         // validation
         for (SinglyLinkedList<Integer> list : (SinglyLinkedList<Integer>[]) new SinglyLinkedList[]{list1, list2}) {
@@ -260,31 +260,55 @@ public final class SinglyLinkedListAlgorithms {
                 throw new IllegalArgumentException(); // means: a not has more than 1 digit
         }
 
-        // result list
-        int tobeAdded;
+        Node<Integer> dummyHead = new Node<>(null, null);
+
+        Node<Integer> resTail = dummyHead;
+        Node<Integer> h1 = list1.head;
+        Node<Integer> h2 = list2.head;
+
+        int numForTail;
         int exceedDigit = 0;
-        SinglyLinkedList<Integer> res = new SinglyLinkedList<>();
 
-        //
-        while (list1.peekLast() != null || list2.peekFirst() != null) {
-            Integer num1 = list1.removeLast();
-            Integer num2 = list2.removeLast();
+        while (h1 != null || h2 != null) {
+            int num1 = h1 == null ? 0 : h1.data;
+            int num2 = h2 == null ? 0 : h2.data;
+            {
+                if (h1 != null) h1 = h1.next;
+                if (h2 != null) h2 = h2.next;
+            }
 
-            tobeAdded = (num1 == null ? 0 : num1) + (num2 == null ? 0 : num2) + exceedDigit;
+            numForTail = num1 + num2 + exceedDigit;
             exceedDigit = 0;
 
-            if (tobeAdded > 9) { // the max/min sum that exceeds the 1 digit of size can be either 9 + 9 + 1 = 19 or 9 + 1 + 0 = 10
+            if (numForTail > 9) { // the max/min sum that exceeds the 1 digit of size can be either 9 + 9 + 1 = 19 or 9 + 1 + 0 = 10
                 // 10 >= tobeAdded <= 19
                 exceedDigit = 1;
-                tobeAdded = tobeAdded - 10;
-                res.addFirst(tobeAdded);
+                numForTail = numForTail - 10;
+                resTail.next = new Node<>(numForTail, null);
+                resTail = resTail.next;
                 continue;
             }
 
-            res.addFirst(tobeAdded);
+            resTail.next = new Node<>(numForTail, null);
+            resTail = resTail.next;
         }
 
+        // store & return
+        SinglyLinkedList<Integer> res = new SinglyLinkedList<>();
+        res.head = dummyHead.next;
+        res.tail = resTail;
+        res.size = _calculateSize(res.head);
+
         return res;
+    }
+
+    private static int _calculateSize(Node<Integer> node) {
+        int size = 0;
+        while (node != null) {
+            size++;
+            node = node.next;
+        }
+        return size;
     }
 
     private static boolean _isSizeLessThan(int size, SinglyLinkedList<Integer> list) {
@@ -292,7 +316,7 @@ public final class SinglyLinkedListAlgorithms {
     }
 
     private static boolean _isLeadingZero(SinglyLinkedList<Integer> list) {
-        return list.head.data == 0;
+        return list.tail.data == 0;
     }
 
     private static boolean _containsNegativeIntegers(SinglyLinkedList<Integer> list) {
