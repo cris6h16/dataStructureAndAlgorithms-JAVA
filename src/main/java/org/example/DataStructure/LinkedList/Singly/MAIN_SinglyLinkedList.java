@@ -1,9 +1,9 @@
 package org.example.DataStructure.LinkedList.Singly;
 
-import static org.example.DataStructure.LinkedList.Singly.MAIN.POSITION.FIRST;
-import static org.example.DataStructure.LinkedList.Singly.MAIN.POSITION.LAST;
+import static org.example.DataStructure.LinkedList.Singly.MAIN_SinglyLinkedList.POSITION.FIRST;
+import static org.example.DataStructure.LinkedList.Singly.MAIN_SinglyLinkedList.POSITION.LAST;
 
-public class MAIN {
+public class MAIN_SinglyLinkedList {
     public static void main(String[] args) {
         final SinglyLinkedList<Integer> bossList = new SinglyLinkedList<>();
         System.out.println("Created: " + bossList);

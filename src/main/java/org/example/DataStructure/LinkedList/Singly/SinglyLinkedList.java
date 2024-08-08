@@ -346,15 +346,8 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
      */
     @Override
     public Iterator<T> iterator() {
-        return new IteratorHelper();
+        return new IteratorHelper<T>(head);
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -371,10 +364,10 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
         return clone;
     }
 
-    private class IteratorHelper implements Iterator<T> {
+    private static  class IteratorHelper <T> implements Iterator<T> {
         Node<T> node;
 
-        public IteratorHelper() {
+        public IteratorHelper(Node<T> head) {
             this.node = head;
         }
 
@@ -394,21 +387,4 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
     }
 
     // static = no need to create an instance of the class to use it
-    protected static class Node<T> {
-        protected T data;
-        protected Node<T> next;
-
-        public Node(T data, Node<T> next) {
-            this.data = data;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "data=" + data +
-                    ", next=" + next +
-                    '}';
-        }
-    }
 }

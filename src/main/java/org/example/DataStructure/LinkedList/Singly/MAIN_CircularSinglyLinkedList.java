@@ -1,25 +1,31 @@
-package org.example.DataStructure.LinkedList.Doubly;
+package org.example.DataStructure.LinkedList.Singly;
 
-public class Main {
-    public static void main(String[] args) throws CloneNotSupportedException {
-        DoublyLinkedList<Integer> clone;
-        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+public class MAIN_CircularSinglyLinkedList {
+    public static void main(String[] args) {
+        CircularSinglyLinkedList<Integer> list = new CircularSinglyLinkedList<>();
+        System.out.println(list);
+        /*
+            [ ] <size: 0>
+         */
+
         list.addFirst(1);
         list.addFirst(2);
         list.addFirst(3);
         list.addFirst(4);
         list.addFirst(5);
+        System.out.println(list);
+        /*
+            [ ↪ 5 -> 4 -> 3 -> 2 -> 1 (last) ↩ ] <size: 5>
+         */
 
         list.addLast(6);
         list.addLast(7);
         list.addLast(8);
         list.addLast(0);
         list.addLast(-1);
-        clone = list.clone(); // data is copied, not the reference
-
         System.out.println(list);
         /*
-            [ (head) 5 <-> 4 <-> 3 <-> 2 <-> 1 <-> 6 <-> 7 <-> 8 <-> 0 <-> -1 (tail) ]
+            [ ↪ 5 -> 4 -> 3 -> 2 -> 1 -> 6 -> 7 -> 8 -> 0 -> -1 (last) ↩ ] <size: 10>
          */
 
         list.removeFirst();
@@ -30,34 +36,33 @@ public class Main {
         list.removeLast();
         System.out.println(list);
         /*
-            [ (head) 2 <-> 1 <-> 6 <-> 7 (tail) ]
+            [ ↪ 2 -> 1 -> 6 -> 7 (last) ↩ ] <size: 4>
          */
 
         list.remove(1);
         list.remove(7);
         System.out.println(list);
         /*
-            [ (head) 2 <-> 6 (tail) ]
+            [ ↪ 2 -> 6 (last) ↩ ] <size: 2>
          */
 
         list.remove(7);
         list.remove(2);
         System.out.println(list);
         /*
-            [ (head) 6 (tail) ]
+            [ ] <size: 0>
          */
 
         list.removeFirst();
         System.out.println(list);
         /*
-            [  ]
+            [ ] <size: 0>
          */
 
-        clone.forEach(e -> System.out.print(e + " | ")); // iterable -> iterator
+        list.addFirst(1);
+        System.out.println(list);
         /*
-            5 | 4 | 3 | 2 | 1 | 6 | 7 | 8 | 0 | -1 |
+            [ ↪ 1 (last) ↩ ] <size: 1>
          */
-
-
     }
 }

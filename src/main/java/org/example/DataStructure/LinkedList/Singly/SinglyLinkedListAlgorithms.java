@@ -1,7 +1,5 @@
 package org.example.DataStructure.LinkedList.Singly;
 
-import static org.example.DataStructure.LinkedList.Singly.SinglyLinkedList.Node;
-
 public final class SinglyLinkedListAlgorithms {
     public static <T extends Comparable<T>> void reverse(SinglyLinkedList<T> list) {
         _reverse(null, list.head);
