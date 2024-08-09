@@ -351,7 +351,7 @@ public class SinglyLinkedList<T extends Comparable<T>> implements List<T>, Itera
 
 
     @Override
-    protected SinglyLinkedList<T> clone() {
+    public SinglyLinkedList<T> clone() {
         Node<T> c = head;
         SinglyLinkedList<T> clone = new SinglyLinkedList<>();
 

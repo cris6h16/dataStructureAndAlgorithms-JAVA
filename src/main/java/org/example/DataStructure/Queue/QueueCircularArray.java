@@ -1,83 +1,117 @@
 package org.example.DataStructure.Queue;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class QueueCircularArray<T> implements Queue<T> {
-    T[] arr;
-    int head, tail;
+    private static final int DEFAULT_CAPACITY = 2;
+    private static final int EMPTY_QUEUE_INDEX = -1;
 
-    public QueueCircularArray(int InitialCapacity) {
-        this.arr = (T[]) new Object[Math.max(InitialCapacity, 2)];
-        head = tail = -1;
+    private T[] arr;
+    private int size;
+    private int headIdx, tailIdx;
+
+    public QueueCircularArray(int initialCapacity) {
+        this.arr = createArray(Math.max(initialCapacity, DEFAULT_CAPACITY));
+        this.headIdx = this.tailIdx = EMPTY_QUEUE_INDEX;
     }
-    // prototype design pattern
+
+    // Prototype Design Pattern
     public QueueCircularArray(QueueCircularArray<T> q) {
         this.arr = q.arr.clone();
-        head = q.head;
-        tail = q.tail;
+        this.headIdx = q.headIdx;
+        this.tailIdx = q.tailIdx;
+        this.size = q.size;
     }
-    //----------------------------
-    @Override
-    public boolean offer(T val) {
-        if (isEmpty()) head++;
-        else if (isFull()) resize();
 
-        tail = (tail + 1) % arr.length;
-        arr[tail] = val;
-        return true;
+    @Override
+    public void offer(T val) {
+        if (isEmpty()) headIdx = tailIdx = 0;
+        else if (isFull()) resize();
+        else tailIdx = goRight(tailIdx);
+
+        arr[tailIdx] = val;
+        size++;
     }
 
     private void resize() {
-        T[] newArr = (T[]) new Object[(int) (arr.length * 2)];
-        int i = 0;
-        while (i <= arr.length - 1) {
-            newArr[i++] = arr[head];
-            head = (head + 1) % arr.length;
+        T[] newArr = createArray(arr.length * 2);
+        int lastEmpty = 0;
+
+        for (int i = headIdx; i != tailIdx; i = goRight(i)) {
+            newArr[lastEmpty++] = arr[i];
         }
-        head = 0;
-        tail = arr.length - 1;
+        newArr[lastEmpty++] = arr[tailIdx]; // copy the last element
+
+        headIdx = 0;
+        tailIdx = lastEmpty;
         arr = newArr;
+        /*
+        [ a, b, c, d, e, f, g, null, null, null ]
+          ^                 ^
+          |                 |
+        head=0           tail=6
+         */
     }
 
 
     @Override
     public T poll() {
-        if (isEmpty()) throw new NoSuchElementException();
+        if (isEmpty()) throw new NoSuchElementException("Queue is empty.");
 
-        T tmp = arr[head];
-        arr[head] = null;
+        T tmp = arr[headIdx];
+        arr[headIdx] = null;
 
-        if (head == tail) head = tail = -1;
-        else head = (head + 1) % arr.length;
+        if (headIdx == tailIdx) headIdx = tailIdx = EMPTY_QUEUE_INDEX;
+        else headIdx = goRight(headIdx);
 
+        size--;
         return tmp;
     }
 
     @Override
     public T peek() {
-        if (isEmpty()) throw new NoSuchElementException();
-        return arr[head];
+        if (isEmpty()) throw new NoSuchElementException("Queue is empty.");
+        return arr[headIdx];
     }
 
     @Override
     public boolean isEmpty() {
-        return head == -1;
+        return size == 0;
     }
 
     @Override
     public boolean isFull() {
-        // if next position for write isn't empty
-        return (tail + 1) % arr.length == head;
+        return size == arr.length;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    private int goRight(int idx) {
+        return (idx + 1) % arr.length;
+    }
+
+    @SuppressWarnings("unchecked")
+    private T[] createArray(int length) {
+        return (T[]) new Object[length];
     }
 
 
-    // prototype design pattern
     @Override
     public Queue<T> clone() {
         return new QueueCircularArray<>(this);
     }
-    //----------------------------
+
+    @Override
+    public String toString() {
+        return "QueueCircularArray{" +
+                "arr=" + Arrays.toString(arr) +
+                ", size=" + size +
+                ", headIdx=" + headIdx +
+                ", tailIdx=" + tailIdx +
+                '}';
+    }
 }

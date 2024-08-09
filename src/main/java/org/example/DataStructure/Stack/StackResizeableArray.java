@@ -1,12 +1,14 @@
 package org.example.DataStructure.Stack;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
-public class StackArray<T> implements Stack<T> {
+public class StackResizeableArray<T> implements Stack<T> {
     private T[] arr;
     private int toAddIdx;
 
-    public StackArray() {
+
+    public StackResizeableArray() {
         this.arr = (T[]) new Object[10];
         this.toAddIdx = 0;
     }
@@ -14,13 +16,12 @@ public class StackArray<T> implements Stack<T> {
     @Override
     public void push(T val) {
         checkCapacity();
-
         arr[toAddIdx++] = val;
     }
 
     @Override
     public T pop() {
-        if (toAddIdx==0) return null;
+        if (size() == 0) throw new EmptyStackException();
 
         T tmp = arr[toAddIdx - 1];
         arr[toAddIdx--] = null;
@@ -30,7 +31,13 @@ public class StackArray<T> implements Stack<T> {
 
     @Override
     public T peek() {
+        if (size() == 0) throw new EmptyStackException();
         return arr[toAddIdx];
+    }
+
+    @Override
+    public int size() {
+        return toAddIdx;
     }
 
     @Override
