@@ -1,5 +1,7 @@
 package org.example.DataStructure.Queue;
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -8,9 +10,11 @@ public class Main {
         queueLinkedListArray();
 
         // algorithms
-        generateBinaryNumbersFrom1ToN();
+        generateBinaryNumbersFrom1ToN(); // logically & trick way
 
     }
+
+
 
     private static  void generateBinaryNumbersFrom1ToN() {
         int n = 14;
@@ -33,6 +37,43 @@ public class Main {
             1101
             1110
          */
+
+        System.out.println("Trick: ");
+        String[] res2 = generateBinaryNumbersFrom1ToN_trick(n);
+        for (String val : res2) System.out.println(val);
+        /*
+        Trick:
+            1
+            10
+            11
+            100
+            101
+            110
+            111
+            1000
+            1001
+            1010
+            1011
+            1100
+            1101
+            1110
+         */
+    }
+    private static String[] generateBinaryNumbersFrom1ToN_trick(int n){
+        java.util.Queue<String> q = new java.util.LinkedList<String>(); // a linkedList only with the queue methods
+        String[] res = new String[n];
+
+        String n1, n2;
+
+        q.offer("1");
+        for (int i = 0; i < res.length; i++){
+            res[i] = q.poll();
+            n1 = res[i] + "0";
+            n2 = res[i] + "1";
+            q.offer(n1);
+            q.offer(n2);
+        }
+        return res;
     }
 
     private static int[] generateBinaryNumbersFrom1ToN(int n) {
