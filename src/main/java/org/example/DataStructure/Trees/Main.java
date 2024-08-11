@@ -1,9 +1,6 @@
 package org.example.DataStructure.Trees;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,27 +42,39 @@ public class Main {
                            -7
                                                
          */
-        System.out.println("\nleft -> root -> right");
-        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.EOrder.IN_ORDER)));
+        System.out.println("\nIN_ORDER: left -> root -> right");
+        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.ETraversalOrder.IN_ORDER)));
         /*
             left -> root -> right
             [-10, -8, -7, -7, -5, -4, -4, -2, -2, 0, 1, 1, 3, 3, 5, 6, 7, 7, 9, 10]
          */
 
-        System.out.println("\nroot -> left -> right");
-        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.EOrder.PRE_ORDER)));
+        System.out.println("\nPRE_ORDER: root -> left -> right");
+        System.out.println("PRE_ORDER (STACK): root -> left -> right");
+        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.ETraversalOrder.PRE_ORDER)));
+        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.ETraversalOrder.PRE_ORDER_STACK)));
         /*
-            root -> left -> right
+            PRE_ORDER: root -> left -> right
+            PRE_ORDER (STACK): root -> left -> right
+            [1, -2, -4, -7, -10, -8, -7, -5, -4, -2, 1, 0, 3, 3, 5, 7, 7, 6, 10, 9]
             [1, -2, -4, -7, -10, -8, -7, -5, -4, -2, 1, 0, 3, 3, 5, 7, 7, 6, 10, 9]
          */
 
-        System.out.println("\nleft -> right -> root");
-        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.EOrder.POST_ORDER)));
+        System.out.println("\nPOST_ORDER: left -> right -> root");
+        System.out.println("\nPOST_ORDER(ITERATION): left -> right -> root");
+        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.ETraversalOrder.POST_ORDER)));
+        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.ETraversalOrder.POST_ORDER_ITERATION)));
         /*
             left -> right -> root
             [-7, -8, -10, -4, -5, -7, -2, -4, 0, 1, -2, 3, 6, 7, 9, 10, 7, 5, 3, 1]
          */
 
+        System.out.println("\nLEVEL_ORDER: level by level");
+        System.out.println(Arrays.toString(tree.toArray(BinaryTreeImpl.ETraversalOrder.LEVEL_ORDER)));
+        /*
+            LEVEL_ORDER: level by level
+            [1, -2, 3, -4, 1, 3, 5, -7, -2, 0, 7, -10, -5, 7, 10, -8, -4, 6, 9, -7]
+         */
 
         System.out.printf("\n\nDeleted: \n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 tree.remove(10),

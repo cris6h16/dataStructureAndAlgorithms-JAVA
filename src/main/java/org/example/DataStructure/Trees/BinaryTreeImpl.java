@@ -1,6 +1,9 @@
 package org.example.DataStructure.Trees;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryTree<T> {
     protected Node<T> root;
@@ -203,74 +206,149 @@ public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryT
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    public T[] toArray(EOrder order) {
+    public Object[] toArray(ETraversalOrder order) {
         if (size < 0) throw new IllegalStateException();
-        T[] res = (T[]) new Object[size];
+        Queue<T> res = new LinkedList<>();
 
         return switch (order) {
             case IN_ORDER -> {
-                inOrderArray(root, res, -1);
-                yield res;
+                inOrderArray(root, res);
+                yield res.toArray();
             }
             case PRE_ORDER -> {
-                preOrderArray(root, res, -1);
-                yield res;
+                preOrderArray(root, res);
+                yield res.toArray();
+            }
+            case PRE_ORDER_STACK -> {
+                preOrderArrayStack(root, res);
+                yield res.toArray();
             }
             case POST_ORDER -> {
-                postOrderArray(root, res, -1);
-                yield res;
+                postOrderArray(root, res);
+                yield res.toArray();
+            }
+            case POST_ORDER_ITERATION -> {
+                postOrderArrayIteration(root, res);
+                yield res.toArray();
+            }
+            case LEVEL_ORDER -> {
+                levelOrder(root, res);
+                yield res.toArray();
             }
         };
 
     }
 
-    // left -> right -> root
-    private int postOrderArray(Node<T> root, T[] res, int lastUsedIdx) {
-        if (root == null) return lastUsedIdx;
+    // Level-order traversal: level by level
+    private void levelOrder(Node<T> root, Queue<T> res) {
+        if (root == null) return;
 
-        // left
-        lastUsedIdx = postOrderArray(root.left, res, lastUsedIdx);
+        Queue<Node<T>> q = new LinkedList<>();
+        q.offer(root);
 
-        // right
-        lastUsedIdx = postOrderArray(root.right, res, lastUsedIdx);
+        while (!q.isEmpty()){
+         Node<T> c = q.poll();
+         res.offer(c.data);
+         if (c.left!=null) q.offer(c.left);
+         if (c.right!=null) q.offer(c.right);
+        }
+    }
+    /* levelOrder
+                                     1
+                                 /         \
+                               -2            3
+                            /      \       /   \
+                          -4        1     3      5
+                          /  \     /              \
+                        -7   -2   0                7
+                       /   \                      /  \
+                    -10     -5                   7    10
 
-        // root
-        res[++lastUsedIdx] = root.data;
+     Queue history:                 Processing
+     [  1 ]
+                                    (queue.poll() ==  1) & save(1)  & offer(1.left)  & offer(1.right)
+     [ -2,  3 ]
+                                    (queue.poll() == -2) & save(-2) & offer(-2.left) & offer(-2.right)
+     [  3, -4, 1 ]
+                                    (queue.poll() ==  3) & save(3)  & offer(3.left)  & offer(3.right)
+     [ -4,  1, 3,  5 ]
+                                    (queue.poll() == -4) & save(-4) & offer(-4.left) & offer(-4.right)
+     [  1,  3, 5, -7, -2 ]
+                                    (queue.poll() ==  1) & save(1)  & offer(1.left)  & offer(1.right)
+     [  3,  5, -7, -2, 0 ]
+                                    ...
+     [  5, -7, -2,  0 ]
+                                    ...
+     [ -7, -2,  0, 7 ]
+                                    ...
 
-        return lastUsedIdx;
+            */
+
+    // todo: doc this is the unique algorithm that I couldn't implement. I'll study it more later...
+    // Post-order traversal with ITERATION: left -> right -> root
+    private void postOrderArrayIteration(Node<T> root, Queue<T> res) {
+        Stack<Node<T>> s = new Stack<>();
+        Node<T> c = root;
+
+        while (c != null || !s.isEmpty()) {
+            if (c != null) {
+                s.push(c);
+                c = c.left;
+            } else { // if there is no left
+                Node<T> right = s.peek().right;
+                if (right == null) { // if there is a leaf
+                    right = s.pop();
+                    res.offer(right.data);
+                    while (!s.isEmpty() && right == s.peek().right) {
+                        right = s.pop();
+                        res.offer(right.data);
+                    }
+                } else {
+                    c = right;
+                }
+            }
+        }
     }
 
-    // root -> left -> right
-    private int preOrderArray(Node<T> root, T[] res, int lastUsedIdx) {
-        if (root == null) return lastUsedIdx;
+    // Post-order traversal: left -> right -> root
+    private void postOrderArray(Node<T> root, Queue<T> res) {
+        if (root == null) return;
 
-        // root
-        res[++lastUsedIdx] = root.data;
-
-        // left
-        lastUsedIdx = preOrderArray(root.left, res, lastUsedIdx);
-
-        // right
-        lastUsedIdx = preOrderArray(root.right, res, lastUsedIdx);
-
-        return lastUsedIdx;
+        postOrderArray(root.left, res);
+        postOrderArray(root.right, res);
+        res.offer(root.data);
     }
 
-    // left -> root -> right
-    private int inOrderArray(Node<T> root, T[] res, int lastUsedIdx) {
-        if (root == null) return lastUsedIdx;
+    // Pre-order traversal: root -> left -> right
+    private void preOrderArray(Node<T> root, Queue<T> res) {
+        if (root == null) return;
 
-        // Traverse left subtree
-        lastUsedIdx = inOrderArray(root.left, res, lastUsedIdx);
+        res.offer(root.data);
+        preOrderArray(root.left, res);
+        preOrderArray(root.right, res);
+    }
 
-        // Visit node
-        res[++lastUsedIdx] = root.data;
+    // Pre-order traversal Stack: root -> left -> right
+    private void preOrderArrayStack(Node<T> root, Queue<T> res) {
+        if (root == null) return;
 
-        // Traverse right subtree
-        lastUsedIdx = inOrderArray(root.right, res, lastUsedIdx);
+        Stack<Node<T>> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node<T> c = stack.pop();
+            if (c.right != null) stack.push(c.right);
+            if (c.left != null) stack.push(c.left);
+            res.offer(c.data);
+        }
+    }
 
-        return lastUsedIdx;
+    // In-order traversal: left -> root -> right
+    private void inOrderArray(Node<T> root, Queue<T> res) {
+        if (root == null) return;
+
+        inOrderArray(root.left, res);
+        res.offer(root.data);
+        inOrderArray(root.right, res);
     }
 
 
@@ -304,7 +382,7 @@ public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryT
 //    }
 
 
-    public static enum EOrder {
+    public static enum ETraversalOrder {
         /**
          * {@code left -> root -> right}
          */
@@ -313,10 +391,16 @@ public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryT
          * {@code root -> left -> right}
          */
         PRE_ORDER,
+        PRE_ORDER_STACK,  // using a stack
         /**
          * {@code left -> right -> root}
          */
-        POST_ORDER
+        POST_ORDER,
+        POST_ORDER_ITERATION,
+        /**
+         * {@code level by level}. also known as {@code breadth-first}
+         */
+        LEVEL_ORDER
     }
 
     protected static class Node<R> {
