@@ -1,0 +1,1 @@
+[//]: # (todo: doc the different between a binary tree and a binary search tree)
