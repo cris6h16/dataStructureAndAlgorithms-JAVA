@@ -13,7 +13,7 @@ public class Main {
 
     private static void binarySearchTree() {
         System.out.println("\n\n\n\n\nBinarySearchTree: ");
-        BinarySearchTreeImpl<Integer> bst = new BinarySearchTreeImpl<Integer>();
+        BinaryTreeImpl<Integer> bst = new BinarySearchTreeImpl<Integer>();
         bst.add(1);
         bst.add(-2);
         bst.add(3);
@@ -52,6 +52,42 @@ public class Main {
         System.out.println("BinarySearchTree height: " + bst.height());
         /*
             BinarySearchTree height: 7
+         */
+
+        System.out.println("\n\nContains: ");
+        Integer[] nums = new Integer[]{1, -2, 3, -4, 1, 3, 5, -7, -2, 0, 7, -10, -5, 7, 10, -8, -4, 6, 9, -7, 999999999, -999999999}; // just the 2 last are not in the tree
+        String arr = Arrays.stream(nums)
+                .map(num -> num + ": " + bst.contains(num))
+                .collect(
+                        Collectors.joining("\n", "[\n", "\n]")
+                );
+        System.out.println(arr);
+        /*
+            Contains:
+            [
+            1: true
+            -2: true
+            3: true
+            -4: true
+            1: true
+            3: true
+            5: true
+            -7: true
+            -2: true
+            0: true
+            7: true
+            -10: true
+            -5: true
+            7: true
+            10: true
+            -8: true
+            -4: true
+            6: true
+            9: true
+            -7: true
+            999999999: false
+            -999999999: false
+            ]
          */
     }
 

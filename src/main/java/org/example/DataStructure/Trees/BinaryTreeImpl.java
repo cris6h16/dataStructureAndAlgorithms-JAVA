@@ -5,8 +5,8 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryTree<T> {
-    protected Node<T> root;
-    protected int size;
+    private Node<T> root;
+    private int size;
 
     public BinaryTreeImpl() {
         this.root = null;
@@ -80,7 +80,7 @@ public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryT
         return _contains(root, obj);
     }
 
-    private boolean _contains(Node<T> current, T val) {
+    protected boolean _contains(Node<T> current, T val) {
         if (current == null) return false;
 
         // best case: current is the val
@@ -152,7 +152,7 @@ public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryT
         return _getMin(root, null);
     }
 
-    private T _getMin(Node<T> node, T min) {
+    protected T _getMin(Node<T> node, T min) {
         if (node == null) return min;
 
         //best case
@@ -171,7 +171,7 @@ public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryT
         return _getMax(root, null);
     }
 
-    private T _getMax(Node<T> node, T max) {
+    protected T _getMax(Node<T> node, T max) {
         if (node == null) return max;
         if (max == null) max = node.data;
 
