@@ -1,11 +1,11 @@
-package org.example.DataStructure.Trees;
+package org.example.DataStructure.Trees.Simples;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTreeImpl<T extends Object & Comparable<T>> implements BinaryTree<T> {
-    private Node<T> root;
+    protected Node<T> root;
     private int size;
 
     public BinaryTreeImpl() {

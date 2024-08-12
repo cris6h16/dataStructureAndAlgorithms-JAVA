@@ -1,6 +1,4 @@
-package org.example.DataStructure.Trees;
-
-import java.util.Iterator;
+package org.example.DataStructure.Trees.Simples;
 
 public interface BinaryTree <T extends Comparable<T>> {
 

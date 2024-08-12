@@ -1,4 +1,4 @@
-package org.example.DataStructure.Trees;
+package org.example.DataStructure.Trees.Simples;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -9,6 +9,46 @@ public class Main {
         binaryTree();
         binarySearchTree();
 
+        // algorithms
+        isBSTValid();
+
+    }
+
+    private static void isBSTValid() {
+        BinarySearchTreeImpl<Integer> bst = new BinarySearchTreeImpl<Integer>();
+        bst.add(1);
+        bst.add(-2);
+        bst.add(3);
+        bst.add(-4);
+        bst.add(5);
+        bst.add(7);
+        bst.add(-7);
+        bst.add(1);
+        bst.add(0);
+        bst.add(10);
+        bst.add(-10);
+        bst.add(9);
+        bst.add(-8);
+        bst.add(-7);
+        bst.add(7);
+        bst.add(-5);
+        bst.add(-4);
+        bst.add(3);
+        bst.add(-2);
+        bst.add(6);
+
+        System.out.println("\n\n\n\n\nIsBSTValid: ");
+        System.out.println("IsBSTValid: " + bst.isValid());
+
+        bst.root.left.left.right.data = 9999;
+
+        System.out.println("\nIsBSTValid: ");
+        System.out.println("IsBSTValid: " + bst.isValid());
+
+        bst.root.left.left.right.data = -9999;
+
+        System.out.println("\nIsBSTValid: ");
+        System.out.println("IsBSTValid: " + bst.isValid());
     }
 
     private static void binarySearchTree() {
@@ -88,6 +128,16 @@ public class Main {
             999999999: false
             -999999999: false
             ]
+         */
+
+        System.out.printf(
+                "\nBigger: %s\nSmaller: %s\n",
+                bst.getMax(),
+                bst.getMin()
+        );
+        /*
+            Bigger: 10
+            Smaller: -10
          */
     }
 
@@ -181,8 +231,8 @@ public class Main {
                 tree.getMin()
         );
         /*
-            LEVEL_ORDER: level by level
-            [1, -2, 3, -4, 1, 3, 5, -7, -2, 0, 7, -10, -5, 7, 10, -8, -4, 6, 9, -7]
+            Bigger: 10
+            Smaller: -10
          */
 
         System.out.println("\n\nContains: ");
