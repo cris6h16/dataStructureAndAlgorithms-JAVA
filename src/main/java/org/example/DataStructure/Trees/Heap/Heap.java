@@ -39,21 +39,21 @@ public class Heap<T> {
     }
 
     private void trickleDown(int idx) {
-        int cL = (2 * idx) + 1; //childLeft
-        int cR = (2 * idx) + 2; //childRight
+        int cLIdx = (2 * idx) + 1; //childLeft
+        int cRIdx = (2 * idx) + 2; //childRight
         // if parent is less, parent goes down..
         // if we want max heap, simply invert the comparison result in Comparator<T> Implementation
-        if (cL <= arr.length - 1 &&
-                arr[cL] != null &&
-                comparator.compare(arr[cL], arr[idx]) < 0) {
-            swap(cL, idx);
-            trickleDown(cL);
+        if (cLIdx <= arr.length - 1 &&
+                arr[cLIdx] != null &&
+                comparator.compare(arr[cLIdx], arr[idx]) < 0) {
+            swap(cLIdx, idx);
+            trickleDown(cLIdx);
         }
-        if (cR <= arr.length - 1 &&
-                arr[cR] != null &&
-                comparator.compare(arr[cR], arr[idx]) < 0) {
-            swap(cR, idx);
-            trickleDown(cR);
+        if (cRIdx <= arr.length - 1 &&
+                arr[cRIdx] != null &&
+                comparator.compare(arr[cRIdx], arr[idx]) < 0) {
+            swap(cRIdx, idx);
+            trickleDown(cRIdx);
         }
     }
 
@@ -66,7 +66,7 @@ public class Heap<T> {
         if (idx <= 0) return;
 
         int parent = (int) Math.floor((idx - 1) / 2);
-        // if child is less, child goes up..
+        // if child is less, child goes up...
         // if we want max heap, simply invert the comparison result in Comparator<T> Implementation
         if (comparator.compare(arr[idx], arr[parent]) < 0) {
             swap(idx, parent);

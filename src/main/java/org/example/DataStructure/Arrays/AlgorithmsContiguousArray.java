@@ -1,6 +1,72 @@
 package org.example.DataStructure.Arrays;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class AlgorithmsContiguousArray {
+
+    AtomicInteger counter = new AtomicInteger(0);
+
+    /*
+        1. Given a sorted array of DISTINCT INTEGERS and a target value,
+        return the index if the target is found. If not, return the index
+        where it would be if it were inserted in order.
+        You must write an algorithm with O(log n) runtime complexity.
+
+        Example:
+         - input: { 1, 3, 5, 7 }, target: 5
+           output: 2
+
+         - output: { 1, 3, 5, 7 }, target: 2
+           output: 1
+
+         - output: { 1, 3, 5, 7 }, target: 8
+           output: 4
+
+         - output: { 1, 3, 5, 7 }, target: 0
+           output: 0
+     */
+    static <T extends Comparable<T>> int searchIdxVal(T[] arr, T target) {
+        int from = 0;
+        int to = arr.length - 1;
+
+        while (from <= to) {
+            int mid = from + (to - from) / 2; // prevent overflow
+            if (arr[mid].compareTo(target) == 0) {
+                return mid; // target found
+            }
+            if (arr[mid].compareTo(target) < 0) { // target is greater
+                from = mid + 1;
+            } else {
+                to = mid - 1;
+            }
+        }
+
+        // 'from' is the correct insertion point if target is not found
+        return from;
+    }
+
+    /*
+    Merge two sorted arrays
+     */
+    @SuppressWarnings("unchecked")
+    static <T extends Object & Comparable<T>> T[] mergeSortedArrays(T[] arr1, T[] arr2) {
+        T[] res = (T[]) new Object[arr1.length + arr2.length];
+        int forInsertIdx = 0;
+        int forTake1 = 0;
+        int forTake2 = 0;
+        T aux;
+
+        while (forInsertIdx < res.length) {
+            if (forTake1 < arr1.length && arr1[forTake1].compareTo(arr2[forTake2]) < 0) {
+                aux = arr1[forTake1++];
+            } else {
+                aux = arr2[forTake2++];
+            }
+            res[forInsertIdx++] = aux;
+        }
+
+        return res;
+    }
 
 
     static boolean isPalindrome(String str) {

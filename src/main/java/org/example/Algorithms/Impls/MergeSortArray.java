@@ -2,7 +2,6 @@ package org.example.Algorithms.Impls;
 
 import org.example.ArrayWithElements.MyUtilClass;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class MergeSortArray {
@@ -10,7 +9,7 @@ public class MergeSortArray {
     // O( n log n)
     // n + n log n ==> , Overall by merge sort: n log n
     public static void main(String[] args) {
-        Integer[] nums = MyUtilClass.getNumsArray();
+        Integer[] nums = MyUtilClass.generateSortedNUms(1, 100);
         if (!MyUtilClass.isSorted(nums)) {
             System.out.println("arr isn't sorted with elements count: " + nums.length);
         }

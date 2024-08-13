@@ -16,9 +16,47 @@ public class Main {
         reverseAnArray();
         findMissingNumber();
         isPalindrome();
+        searchIdxValElseWhereItShouldBe(); // O(log n)
+        mergeSortedArrays();
 
         //
         circularArrayContiguous();
+    }
+
+    public static void mergeSortedArrays(){
+        Integer[] arr1 = {1, 3, 5, 7};
+        Integer[] arr2 = {2, 4, 6, 8};
+        Integer[] result = AlgorithmsContiguousArray.mergeSortedArrays(arr1, arr2);
+
+        System.out.println(Arrays.toString(result));
+    }
+
+    public static void searchIdxValElseWhereItShouldBe() {
+        Integer[] arr = {1, 3, 5, 7, 9, 10, 11, 13 , 15 };
+        System.out.println(Arrays.toString(arr));
+        System.out.printf("0: %s - 1: %s - 2: %s - 3: %s - 4: %s - 5: %s - 6: %s - 7: %s - 8: %s - 9: %s - 10: %s - 11: %s - 12: %s - 13: %s - 14: %s - 15: %s - 16: %s\n",
+                AlgorithmsContiguousArray.searchIdxVal(arr, 0),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 1),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 2),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 3),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 4),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 5),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 6),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 7),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 8),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 9),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 10),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 11),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 12),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 13),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 14),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 15),
+                AlgorithmsContiguousArray.searchIdxVal(arr, 16)
+        );
+        /*
+            [1, 3, 5, 7, 9, 10, 11, 13, 15]
+            0: 0 - 1: 0 - 2: 1 - 3: 1 - 4: 2 - 5: 2 - 6: 3 - 7: 3 - 8: 4 - 9: 4 - 10: 5 - 11: 6 - 12: 7 - 13: 7 - 14: 8 - 15: 8 - 16: 9
+         */
     }
 
     private static void circularArrayContiguous() {
