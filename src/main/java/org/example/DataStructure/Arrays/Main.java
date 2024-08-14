@@ -18,12 +18,24 @@ public class Main {
         isPalindrome();
         searchIdxValElseWhereItShouldBe(); // O(log n)
         mergeSortedArrays();
+        dutchNationalFlagProblem();
 
         //
         circularArrayContiguous();
     }
 
-    public static void mergeSortedArrays(){
+    static void dutchNationalFlagProblem() {
+        Integer[] arr = {2, 1, 2, 1, 2, 0, 1, 2, 0, 1, 0, 1, 2, 2, 0};
+        AlgorithmsContiguousArray.dutchNationalFlagProblem(arr);
+        System.out.println("\n"+
+                java.util.Arrays.toString(arr)
+        );
+        /*
+            [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2]
+         */
+    }
+
+    public static void mergeSortedArrays() {
         Integer[] arr1 = {1, 3, 5, 7};
         Integer[] arr2 = {2, 4, 6, 8};
         Integer[] result = AlgorithmsContiguousArray.mergeSortedArrays(arr1, arr2);
@@ -32,7 +44,7 @@ public class Main {
     }
 
     public static void searchIdxValElseWhereItShouldBe() {
-        Integer[] arr = {1, 3, 5, 7, 9, 10, 11, 13 , 15 };
+        Integer[] arr = {1, 3, 5, 7, 9, 10, 11, 13, 15};
         System.out.println(Arrays.toString(arr));
         System.out.printf("0: %s - 1: %s - 2: %s - 3: %s - 4: %s - 5: %s - 6: %s - 7: %s - 8: %s - 9: %s - 10: %s - 11: %s - 12: %s - 13: %s - 14: %s - 15: %s - 16: %s\n",
                 AlgorithmsContiguousArray.searchIdxVal(arr, 0),

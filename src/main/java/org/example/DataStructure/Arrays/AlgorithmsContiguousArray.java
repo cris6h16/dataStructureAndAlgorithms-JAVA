@@ -1,5 +1,6 @@
 package org.example.DataStructure.Arrays;
 
+import java.lang.reflect.Array;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AlgorithmsContiguousArray {
@@ -49,25 +50,58 @@ public class AlgorithmsContiguousArray {
     Merge two sorted arrays
      */
     @SuppressWarnings("unchecked")
-    static <T extends Object & Comparable<T>> T[] mergeSortedArrays(T[] arr1, T[] arr2) {
-        T[] res = (T[]) new Object[arr1.length + arr2.length];
+    static <T extends Comparable<T>> T[] mergeSortedArrays(T[] arr1, T[] arr2) {
+        T[] res = (T[]) java.lang.reflect.Array.newInstance(arr1.getClass().getComponentType(), arr1.length + arr2.length);
         int forInsertIdx = 0;
         int forTake1 = 0;
         int forTake2 = 0;
         T aux;
 
-        while (forInsertIdx < res.length) {
-            if (forTake1 < arr1.length && arr1[forTake1].compareTo(arr2[forTake2]) < 0) {
+        while (forTake1 < arr1.length && forTake2 < arr2.length) {
+            if (arr1[forTake1].compareTo(arr2[forTake2]) < 0) {
                 aux = arr1[forTake1++];
             } else {
                 aux = arr2[forTake2++];
             }
+
             res[forInsertIdx++] = aux;
+        }
+
+        while (forTake1 < arr1.length) {
+            res[forInsertIdx++] = arr1[forTake1++];
+        }
+        while (forTake2 < arr2.length) {
+            res[forInsertIdx++] = arr2[forTake2++];
         }
 
         return res;
     }
 
+    /*  Dutch National Flag Problem
+
+    1. Given an array containing only 0's, 1's and 2's. Sort
+    the array in linear time ( O(n) ) and constant space
+     */
+
+    // [ 0 , 0 , 1 , 1 , 2 , 2 ]
+    static void dutchNationalFlagProblem(Integer[] arr) {
+        int leftIdx = 0;
+        int midIdx = 0;
+        int rightIdx = arr.length - 1;
+        int c;
+
+        // 0's are in range: ( -∞ ; leftIdx )
+        // 1's are in range: [ leftIdx ; midIdx )
+        // unknowns are in:  [ midIdx ; rightIdx ]
+        // 2's are in range: ( rightIdx ; ∞ )
+
+        while (midIdx <= rightIdx) { // from rightIdx + 1 are the 2's...
+            c = arr[midIdx];
+            if (c == 0) _swap(arr, leftIdx++, midIdx++);
+            if (c == 1) midIdx++; // already in the mid
+            if (c == 2) _swap(arr, midIdx, rightIdx--); // dont increase midIdx, Idk the former value in rightIdx
+        }
+    }
 
     static boolean isPalindrome(String str) {
         boolean is = true;
